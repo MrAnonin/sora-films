@@ -60,24 +60,44 @@ button,.btn{border:0;cursor:pointer;text-decoration:none;display:inline-block;te
 .btn-gold{background:var(--gold);color:#fff}
 .btn-outline{background:#fff;color:var(--maroon);border:2px solid var(--maroon)}
 .hint{background:#fff8e6;border:1px solid var(--gold);border-radius:10px;padding:12px 14px;font-size:14px}
+.errorbox{display:none;background:#fff1f1;border:2px solid #b42318;border-radius:10px;padding:12px 14px;font-size:14px;color:#7a1a12;margin:14px 0}
+.errorbox.show{display:block}
+.errorbox ul{margin:6px 0 0 18px;padding:0}
+.field-error input,.field-error select,.field-error textarea{border-color:#b42318!important;outline:2px solid #f0b8b2!important}
+.print-block{margin:0}
 footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 @media(max-width:640px){.grid,.grid3,.sig{grid-template-columns:1fr}header.brand h1{font-size:34px}.tablewrap{overflow-x:auto}table{min-width:620px}}
 @media print{
-  @page{size:A4;margin:13mm}
-  body{background:#fff;font-size:12.5px}
-  .no-print{display:none!important}
+  @page{size:A4;margin:12mm 13mm}
+  html,body{background:#fff}
+  body{font-size:11.5px;line-height:1.35}
+  .no-print,.errorbox{display:none!important}
   .wrap{max-width:none;padding:0}
-  header.brand{border-width:2px;padding:16px 14px}
-  header.brand h1{font-size:32px}
-  h2{font-size:19px;margin-top:20px}
-  h3{font-size:16px}
+  header.brand{border-width:2px;padding:14px 12px;break-inside:avoid;page-break-inside:avoid}
+  header.brand h1{font-size:30px}
+  header.brand .contact{font-size:12px}
+  /* No block is ever cut in half: a whole section moves to the next page instead. */
+  .print-block{break-inside:avoid;page-break-inside:avoid;break-after:auto}
+  h2{font-size:17px;margin:14px 0 5px;padding-bottom:5px;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}
+  h3{font-size:15px;margin:10px 0 6px;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}
+  p.note{font-size:12px;margin:2px 0 8px;break-inside:avoid;page-break-inside:avoid}
+  .grid,.grid3,.checks,.field,.tablewrap,.event-section,.terms,.sig{break-inside:avoid;page-break-inside:avoid}
   .event-section{display:none!important;border:0;padding:0}
   .event-section.active{display:block!important}
-  input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{border:0;border-bottom:1px solid #999;border-radius:0;padding:4px 2px;background:transparent}
+  table{font-size:11.5px;margin:6px 0;break-inside:avoid;page-break-inside:avoid}
+  th{padding:6px 7px;font-size:11.5px}
+  td{padding:5px 6px}
+  tr{break-inside:avoid;page-break-inside:avoid}
+  .terms{font-size:12px}
+  .terms ol{margin:4px 0}
+  .terms li{margin-bottom:4px;break-inside:avoid;page-break-inside:avoid;orphans:3;widows:3}
+  .sigbox{min-height:195px;padding:14px;break-inside:avoid;page-break-inside:avoid}
+  .stamp{height:72px}
+  .signline{height:34px}
+  input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{border:0;border-bottom:1px solid #999;border-radius:0;padding:3px 2px;background:transparent;font-size:11.5px}
   select{appearance:none}
-  textarea{min-height:48px}
-  .sigbox{min-height:200px;break-inside:avoid}
-  .terms li{margin-bottom:5px}
+  textarea{min-height:36px;height:auto;overflow:visible;white-space:pre-wrap;word-wrap:break-word}
+  footer{margin-top:18px;break-inside:avoid;page-break-inside:avoid}
   a{color:inherit;text-decoration:none}
 }
 </style>
@@ -99,8 +119,10 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <a class="btn btn-outline" href="index.html">Back to Website</a>
 </div>
 <p class="hint"><b>How to use:</b> Choose your event type below, fill the details, check the contract lines, sign both blocks, then press <b>Print Contract</b>. In the print window you can also choose <b>Save as PDF</b> to keep a digital copy. Date is required; time is optional everywhere.</p>
+<p class="hint no-print"><b>Form rules — irrelevant entries are blocked before printing:</b> dates cannot be in the past; phone must be a valid 10-digit Indian mobile (with optional +91); names must contain letters only; advance cannot be more than the total; a schedule row with a time or venue but no date is not accepted; fields that do not apply to the chosen event (for example, bride/groom names on a birthday contract) are hidden and cannot be printed; and you must tick “I have read and accept” plus exactly one Portfolio Permission choice before printing.</p>
+<div id="errorBox" class="errorbox no-print" role="alert"></div>
 
-<h2>1 &nbsp;•&nbsp; Choose Your Event</h2>
+<div class="print-block"><h2>1 &nbsp;•&nbsp; Choose Your Event</h2>
 <div class="tabs no-print" role="group" aria-label="Event type">
 <button type="button" class="tab" data-event="marriage" aria-pressed="true">Marriage / Wedding</button>
 <button type="button" class="tab" data-event="engagement" aria-pressed="false">Engagement</button>
@@ -110,32 +132,33 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 </div>
 <p class="note">Selected event: <b id="selectedEventLabel">Marriage / Wedding</b>. Only the selected event's schedule will print.</p>
 <div class="grid">
-<div class="field"><label for="contractNo">Contract No. <span class="opt">(to be filled by Sora Films)</span></label><input id="contractNo" type="text" placeholder="e.g. SF-2026-___"></div>
+<div class="field"><label for="contractNo">Contract No. <span class="opt">(to be filled by Sora Films)</span></label><input id="contractNo" type="text" placeholder="e.g. SF-2026-___" maxlength="20"></div>
 <div class="field"><label for="contractDate">Contract Date <span class="req">*</span></label><input id="contractDate" type="date" required></div>
-</div>
-
-<h2>2 &nbsp;•&nbsp; Client Details</h2>
+</div></div>
+<div class="print-block"><h2>2 &nbsp;•&nbsp; Client Details</h2>
 <div class="grid">
-<div class="field"><label for="clientName">Client / Family Contact Name <span class="req">*</span></label><input id="clientName" type="text" placeholder="Full name" required></div>
-<div class="field"><label for="clientPhone">Phone / WhatsApp <span class="req">*</span></label><input id="clientPhone" type="tel" placeholder="+91 ______" required></div>
-<div class="field"><label for="brideName">Bride's Name <span class="opt">(for wedding / engagement)</span></label><input id="brideName" type="text" placeholder="If applicable"></div>
-<div class="field"><label for="groomName">Groom's Name <span class="opt">(for wedding / engagement)</span></label><input id="groomName" type="text" placeholder="If applicable"></div>
-<div class="field"><label for="clientEmail">Email <span class="opt">(optional)</span></label><input id="clientEmail" type="email" placeholder="Optional"></div>
-<div class="field"><label for="clientCity">City / Town</label><input id="clientCity" type="text" placeholder="e.g. Gaya Ji"></div>
+<div class="field"><label for="clientName">Client / Family Contact Name <span class="req">*</span></label><input id="clientName" type="text" placeholder="Full name" required maxlength="60"></div>
+<div class="field"><label for="clientPhone">Phone / WhatsApp <span class="req">*</span></label><input id="clientPhone" type="tel" inputmode="tel" placeholder="+91 98765 43210" required maxlength="14"></div>
 </div>
-<div class="field"><label for="clientAddress">Address</label><textarea id="clientAddress" rows="2" placeholder="Full address"></textarea></div>
-
-<h2>3 &nbsp;•&nbsp; Main Event Details</h2>
+<div class="grid" id="coupleFields">
+<div class="field"><label for="brideName">Bride's Name <span class="opt">(wedding / engagement / pre-wedding only)</span></label><input id="brideName" type="text" placeholder="If applicable" maxlength="60"></div>
+<div class="field"><label for="groomName">Groom's Name <span class="opt">(wedding / engagement / pre-wedding only)</span></label><input id="groomName" type="text" placeholder="If applicable" maxlength="60"></div>
+</div>
+<div class="grid">
+<div class="field"><label for="clientEmail">Email <span class="opt">(optional)</span></label><input id="clientEmail" type="email" placeholder="Optional" maxlength="80"></div>
+<div class="field"><label for="clientCity">City / Town</label><input id="clientCity" type="text" placeholder="e.g. Gaya Ji" maxlength="40"></div>
+</div>
+<div class="field"><label for="clientAddress">Address</label><textarea id="clientAddress" rows="2" placeholder="Full address" maxlength="300"></textarea></div></div>
+<div class="print-block"><h2>3 &nbsp;•&nbsp; Main Event Details</h2>
 <div class="grid">
 <div class="field"><label for="mainEventName">Event Name</label><input id="mainEventName" type="text" value="Marriage / Wedding" placeholder="e.g. Marriage, Engagement, Birthday"></div>
 <div class="field"><label for="mainDate">Main Event Date <span class="req">*</span></label><input id="mainDate" type="date" required></div>
 <div class="field"><label for="mainTime">Main Event Time <span class="opt">(optional)</span></label><input id="mainTime" type="time"></div>
-<div class="field"><label for="days">Number of Coverage Days</label><input id="days" type="number" min="1" placeholder="e.g. 2"></div>
+<div class="field"><label for="days">Number of Coverage Days</label><input id="days" type="number" min="1" max="10" step="1" placeholder="e.g. 2"></div>
 </div>
-<div class="field"><label for="venue">Main Venue Name &amp; Address</label><textarea id="venue" rows="2" placeholder="Venue, area, city"></textarea></div>
-<div class="field"><label for="notes">Special Notes / Key Moments to Capture <span class="opt">(optional)</span></label><textarea id="notes" rows="3" placeholder="e.g. Family group photos, first look, drone shots at baraat"></textarea></div>
-
-<h2>4 &nbsp;•&nbsp; Event Schedule — Date is required, Time is optional</h2>
+<div class="field"><label for="venue">Main Venue Name &amp; Address</label><textarea id="venue" rows="2" placeholder="Venue, area, city" maxlength="200"></textarea></div>
+<div class="field"><label for="notes">Special Notes / Key Moments to Capture <span class="opt">(optional)</span></label><textarea id="notes" rows="3" placeholder="e.g. Family group photos, first look, drone shots at baraat" maxlength="300"></textarea></div></div>
+<div class="print-block"><h2>4 &nbsp;•&nbsp; Event Schedule — Date is required, Time is optional</h2>
 <p class="note">Fill the date for every function that will be covered. Leave a row blank if that function is not part of your event. Time and venue are optional in every row.</p>
 
 <!-- MARRIAGE -->
@@ -143,15 +166,15 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <h3>Marriage / Wedding Schedule</h3>
 <div class="tablewrap"><table>
 <tr><th>Traditional Event / Function</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Haldi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Barat / Baraat</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Wedding Ceremony / Vivah / Pheras</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Reception</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Vidaai</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td><input type="text" placeholder="Other function — write here"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
+<tr><td class="event">Haldi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Barat / Baraat</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Wedding Ceremony / Vivah / Pheras</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Reception</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Vidaai</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other function — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section>
 
@@ -160,27 +183,27 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <h3>Engagement Schedule</h3>
 <div class="tablewrap"><table>
 <tr><th>Function</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Engagement Ceremony / Sagai</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Ring Ceremony</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Family / Couple Photoshoot</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td><input type="text" placeholder="Other function — write here"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
+<tr><td class="event">Engagement Ceremony / Sagai</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Ring Ceremony</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Family / Couple Photoshoot</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other function — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section>
 
 <!-- BIRTHDAY -->
 <section class="event-section" data-section="birthday" aria-label="Birthday schedule">
 <h3>Birthday Schedule</h3>
-<div class="field"><label for="birthdayPerson">Birthday Person's Name &amp; Age <span class="opt">(optional)</span></label><input id="birthdayPerson" type="text" placeholder="e.g. Aarav — turning 5"></div>
+<div class="field"><label for="birthdayPerson">Birthday Person's Name &amp; Age <span class="opt">(optional)</span></label><input id="birthdayPerson" type="text" placeholder="e.g. Aarav — turning 5" maxlength="60"></div>
 <div class="tablewrap"><table>
 <tr><th>Function / Moment</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Birthday Celebration</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Cake Cutting</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Family &amp; Friends Photos</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td class="event">Games / Activities Coverage</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td><input type="text" placeholder="Other moment — write here"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
+<tr><td class="event">Birthday Celebration</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Cake Cutting</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Family &amp; Friends Photos</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Games / Activities Coverage</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other moment — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section>
 
@@ -188,32 +211,31 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <section class="event-section" data-section="prewedding" aria-label="Pre-wedding schedule">
 <h3>Pre-Wedding Schedule</h3>
 <div class="grid">
-<div class="field"><label for="pwLocation">Shoot Location(s)</label><input id="pwLocation" type="text" placeholder="e.g. Bodh Gaya, Rajgir"></div>
-<div class="field"><label for="pwTheme">Theme / Outfit Notes <span class="opt">(optional)</span></label><input id="pwTheme" type="text" placeholder="e.g. Traditional + western outfits"></div>
+<div class="field"><label for="pwLocation">Shoot Location(s)</label><input id="pwLocation" type="text" placeholder="e.g. Bodh Gaya, Rajgir" maxlength="120"></div>
+<div class="field"><label for="pwTheme">Theme / Outfit Notes <span class="opt">(optional)</span></label><input id="pwTheme" type="text" placeholder="e.g. Traditional + western outfits" maxlength="120"></div>
 </div>
 <div class="tablewrap"><table>
 <tr><th>Shoot Session</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Location <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Pre-Wedding Shoot — Day / Session 1</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location"></td></tr>
-<tr><td class="event">Pre-Wedding Shoot — Day / Session 2</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location"></td></tr>
-<tr><td class="event">Couple Teaser / Reel Shoot</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location"></td></tr>
-<tr><td><input type="text" placeholder="Other session — write here"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location"></td></tr>
+<tr><td class="event">Pre-Wedding Shoot — Day / Session 1</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><td class="event">Pre-Wedding Shoot — Day / Session 2</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><td class="event">Couple Teaser / Reel Shoot</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other session — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
 </table></div>
 </section>
 
 <!-- OTHER -->
 <section class="event-section" data-section="other" aria-label="Other event schedule">
 <h3>Other Event Schedule</h3>
-<div class="field"><label for="otherEventName">What is the event? <span class="req">*</span></label><input id="otherEventName" type="text" placeholder="e.g. Anniversary, Baby Shower / Godh Bharai, Naming Ceremony, Corporate Event, Haldi-Kumkum"></div>
+<div class="field"><label for="otherEventName">What is the event? <span class="req">*</span></label><input id="otherEventName" type="text" placeholder="e.g. Anniversary, Baby Shower / Godh Bharai, Naming Ceremony, Corporate Event, Haldi-Kumkum" maxlength="80"></div>
 <div class="tablewrap"><table>
 <tr><th>Function / Session</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td><input type="text" placeholder="Function 1"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td><input type="text" placeholder="Function 2"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td><input type="text" placeholder="Function 3"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
-<tr><td><input type="text" placeholder="Function 4"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue"></td></tr>
+<tr><td><input type="text" placeholder="Function 1" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Function 2" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Function 3" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Function 4" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
-</section>
-
-<h2>5 &nbsp;•&nbsp; Package &amp; Services</h2>
+</section></div>
+<div class="print-block"><h2>5 &nbsp;•&nbsp; Package &amp; Services</h2>
 <div class="grid">
 <div class="field"><label for="package">Package Selected</label>
 <select id="package">
@@ -226,7 +248,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <option>Essential — Royal — ₹25,000 (Traditional Videos)</option>
 <option>Custom Package — as per quotation</option>
 </select></div>
-<div class="field"><label for="customPackage">Custom Package Details <span class="opt">(if Custom selected)</span></label><input id="customPackage" type="text" placeholder="Write package details here"></div>
+<div class="field"><label for="customPackage">Custom Package Details <span class="opt">(if Custom selected)</span></label><input id="customPackage" type="text" placeholder="Write package details here" maxlength="120"></div>
 </div>
 <p class="note">Tick all services included in this booking:</p>
 <div class="checks">
@@ -241,20 +263,18 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <label><input type="checkbox" class="svc" value="Pre-Wedding Shoot"> Pre-Wedding Shoot</label>
 <label><input type="checkbox" class="svc" value="Reels"> Reels</label>
 </div>
-<div class="field"><label for="otherService">Other Services <span class="opt">(optional)</span></label><input id="otherService" type="text" placeholder="e.g. Live streaming, extra album"></div>
-
-<h2>6 &nbsp;•&nbsp; Payment — Fill the agreed figures, nothing is pre-filled</h2>
+<div class="field"><label for="otherService">Other Services <span class="opt">(optional)</span></label><input id="otherService" type="text" placeholder="e.g. Live streaming, extra album" maxlength="120"></div></div>
+<div class="print-block"><h2>6 &nbsp;•&nbsp; Payment — Fill the agreed figures, nothing is pre-filled</h2>
 <div class="grid3">
-<div class="field"><label for="totalAmt">Total Package Amount (₹)</label><input id="totalAmt" type="number" min="0" placeholder="As per quotation"></div>
-<div class="field"><label for="advanceAmt">Advance Received (₹)</label><input id="advanceAmt" type="number" min="0" placeholder="Amount received"></div>
-<div class="field"><label for="balanceAmt">Balance Due (₹)</label><input id="balanceAmt" type="number" min="0" placeholder="Auto-calculated, or fill manually"></div>
+<div class="field"><label for="totalAmt">Total Package Amount (₹)</label><input id="totalAmt" type="number" min="0" max="10000000" step="1" placeholder="As per quotation"></div>
+<div class="field"><label for="advanceAmt">Advance Received (₹)</label><input id="advanceAmt" type="number" min="0" max="10000000" step="1" placeholder="Amount received"></div>
+<div class="field"><label for="balanceAmt">Balance Due (₹)</label><input id="balanceAmt" type="number" min="0" max="10000000" step="1" placeholder="Auto-calculated, or fill manually"></div>
 </div>
 <div class="grid">
 <div class="field"><label for="payMode">Payment Mode</label><select id="payMode"><option value="">Select</option><option>Cash</option><option>UPI</option><option>Bank Transfer</option><option>Other</option></select></div>
-<div class="field"><label for="deliveryNote">Delivery</label><input id="deliveryNote" type="text" value="Confirmed in your quotation" placeholder="Confirmed in your quotation"></div>
-</div>
-
-<h2>7 &nbsp;•&nbsp; Contract Terms — Please read before signing</h2>
+<div class="field"><label for="deliveryNote">Delivery</label><input id="deliveryNote" type="text" value="Confirmed in your quotation" placeholder="Confirmed in your quotation" maxlength="80"></div>
+</div></div>
+<div class="print-block"><h2>7 &nbsp;•&nbsp; Contract Terms — Please read before signing</h2>
 <div class="terms">
 <ol>
 <li><b>Booking &amp; Confirmation:</b> Booking is confirmed only after the client accepts these terms, the date is available, and the agreed advance is received. Package details and the payment schedule should be recorded in the quotation or invoice.</li>
@@ -269,6 +289,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <li><b>Copyright &amp; Personal Use:</b> Unless otherwise agreed in writing, copyright remains with the photographer, subject to applicable law. After full payment, the client receives a personal-use licence to download, print, and share delivered images for non-commercial purposes. Commercial use or major alterations require written permission.</li>
 <li><b>Portfolio Permission:</b> Sora Films may use selected images or clips for portfolio, website, social media, competitions, or promotion only if the client grants permission below. Permission is optional and declining it will not affect the booking.</li>
 <li><b>Privacy &amp; Complaints:</b> The studio will take reasonable steps to handle client files responsibly. Please raise concerns in writing within 14 days of delivery so both parties can try to resolve them fairly. Nothing in these terms limits rights or remedies that cannot legally be excluded under applicable law.</li>
+<li><b>Information Accuracy &amp; Restrictions:</b> The client must give accurate, relevant details only — a valid Indian mobile number, correct event dates (never in the past), and only the functions, services and figures that apply to this booking. Irrelevant, false or incomplete details may be asked to be corrected before the booking is confirmed, and the studio is not responsible for coverage missed because the schedule given was wrong.</li>
 </ol>
 <p>Full details are in the <a href="index.html#/policies">Terms &amp; Policies</a> on the Sora Films website. In case of any difference, the written quotation for this booking will apply to price, package and delivery.</p>
 <div class="checks">
@@ -276,9 +297,8 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <label><input type="checkbox" id="portfolioYes"> Portfolio Permission: YES — Sora Films may use selected photos/clips</label>
 <label><input type="checkbox" id="portfolioNo"> Portfolio Permission: NO</label>
 </div>
-</div>
-
-<h2>8 &nbsp;•&nbsp; Signatures</h2>
+</div></div>
+<div class="print-block"><h2>8 &nbsp;•&nbsp; Signatures</h2>
 <p class="note">Both parties sign below. Each side keeps a signed copy — printed or as PDF.</p>
 <div class="sig">
 <div class="sigbox">
@@ -286,7 +306,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <div class="stamp">Sora Films — Stamp Here</div>
 <div class="field"><label>Signature</label><div class="signline"></div></div>
 <div class="grid">
-<div class="field"><label for="soraName">Name</label><input id="soraName" type="text" placeholder="Sora Films representative"></div>
+<div class="field"><label for="soraName">Name</label><input id="soraName" type="text" placeholder="Sora Films representative" maxlength="60"></div>
 <div class="field"><label for="soraDate">Date</label><input id="soraDate" type="date"></div>
 </div>
 <p class="note">Pantnagar, Gaya Ji, Bihar 823001 • +91 91551 04962</p>
@@ -296,12 +316,11 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <p class="note">By signing, the client confirms the event details, package, payment figures and terms above are correct.</p>
 <div class="field"><label>Signature</label><div class="signline"></div></div>
 <div class="grid">
-<div class="field"><label for="clientSignName">Name (in block letters)</label><input id="clientSignName" type="text" placeholder="Full name"></div>
+<div class="field"><label for="clientSignName">Name (in block letters)</label><input id="clientSignName" type="text" placeholder="Full name" maxlength="60"></div>
 <div class="field"><label for="clientSignDate">Date</label><input id="clientSignDate" type="date"></div>
 </div>
 </div>
-</div>
-
+</div></div>
 <div class="btnrow no-print">
 <button type="button" class="btn-maroon" onclick="printContract()">🖨️ Print Contract</button>
 <button type="button" class="btn-gold" onclick="sendWhatsApp()">Send details on WhatsApp</button>
@@ -315,7 +334,17 @@ var tabs=document.querySelectorAll('.tab');
 var sections=document.querySelectorAll('.event-section');
 var label=document.getElementById('selectedEventLabel');
 var mainEvent=document.getElementById('mainEventName');
+var currentEvent='marriage';
+function setCoupleVisibility(){
+  var cf=document.getElementById('coupleFields');
+  var bride=document.getElementById('brideName'), groom=document.getElementById('groomName');
+  var show=(currentEvent==='marriage'||currentEvent==='engagement'||currentEvent==='prewedding');
+  if(cf){ cf.style.display=show?'grid':'none'; }
+  if(!show){ if(bride){bride.value=''; bride.disabled=true;} if(groom){groom.value=''; groom.disabled=true;} }
+  else { if(bride) bride.disabled=false; if(groom) groom.disabled=false; }
+}
 function selectEvent(key, name){
+  currentEvent=key;
   tabs.forEach(function(t){t.setAttribute('aria-pressed', t.dataset.event===key ? 'true':'false')});
   sections.forEach(function(s){s.classList.toggle('active', s.dataset.section===key)});
   label.textContent=name;
@@ -324,14 +353,20 @@ function selectEvent(key, name){
     var other=document.getElementById('otherEventName');
     if(other && other.value){ mainEvent.value=other.value; }
   }
+  setCoupleVisibility();
 }
 tabs.forEach(function(t){
   t.addEventListener('click', function(){ selectEvent(t.dataset.event, t.textContent.trim()); });
 });
 var otherInput=document.getElementById('otherEventName');
 if(otherInput){ otherInput.addEventListener('input', function(){ mainEvent.value=otherInput.value; }); }
-var today=new Date().toISOString().slice(0,10);
-var cd=document.getElementById('contractDate'); if(cd && !cd.value) cd.value=today;
+var today=new Date(); today.setHours(0,0,0,0);
+var todayStr=today.toISOString().slice(0,10);
+var cd=document.getElementById('contractDate'); if(cd && !cd.value) cd.value=todayStr; if(cd) cd.max=todayStr;
+var md=document.getElementById('mainDate'); if(md) md.min=todayStr;
+document.querySelectorAll('.sched-date').forEach(function(d){ d.min=todayStr; });
+var sd=document.getElementById('soraDate'); if(sd) sd.max=todayStr;
+var csd=document.getElementById('clientSignDate'); if(csd) csd.max=todayStr;
 var total=document.getElementById('totalAmt'), adv=document.getElementById('advanceAmt'), bal=document.getElementById('balanceAmt');
 function calcBalance(){
   if(total.value!=='' && adv.value!==''){
@@ -341,12 +376,146 @@ function calcBalance(){
 }
 if(total) total.addEventListener('input', calcBalance);
 if(adv) adv.addEventListener('input', calcBalance);
+var py=document.getElementById('portfolioYes'), pn=document.getElementById('portfolioNo');
+if(py && pn){
+  py.addEventListener('change', function(){ if(py.checked) pn.checked=false; });
+  pn.addEventListener('change', function(){ if(pn.checked) py.checked=false; });
+}
+var phoneEl=document.getElementById('clientPhone');
+if(phoneEl){
+  phoneEl.addEventListener('input', function(){
+    var v=phoneEl.value.replace(/[^0-9+]/g,'');
+    if(v.indexOf('+')>0) v=v.replace(/\+/g,'');
+    phoneEl.value=v.slice(0,14);
+  });
+}
+function cleanPhone(v){
+  var d=v.replace(/[^0-9]/g,'');
+  if(d.length===12 && d.indexOf('91')===0) d=d.slice(2);
+  if(d.length===11 && d[0]==='0') d=d.slice(1);
+  return d;
+}
+function isName(v){ return /^[\p{L} .'-]+$/u.test(v); }
+function hasLink(v){ return /https?:\/\/|www\./i.test(v); }
+function mark(el, bad){
+  if(!el) return;
+  var f=el.closest('.field')||el.parentElement;
+  if(f) f.classList.toggle('field-error', !!bad);
+  if(bad) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid');
+}
+function validateContract(){
+  var errors=[]; var firstBad=null;
+  function bad(el, msg){ errors.push(msg); mark(el,true); if(!firstBad) firstBad=el; }
+  function good(el){ mark(el,false); }
+  document.querySelectorAll('.field-error').forEach(function(f){f.classList.remove('field-error')});
+  var todayMid=new Date(); todayMid.setHours(0,0,0,0);
+  function parseDate(v){ if(!v) return null; var d=new Date(v+'T00:00:00'); return isNaN(d)?null:d; }
+  var contractDateEl=document.getElementById('contractDate');
+  if(!contractDateEl.value){ bad(contractDateEl,'Contract Date is required.'); }
+  else if(parseDate(contractDateEl.value)>todayMid){ bad(contractDateEl,'Contract Date cannot be in the future.'); } else good(contractDateEl);
+  var cn=document.getElementById('clientName');
+  if(!cn.value.trim()){ bad(cn,'Client name is required.'); }
+  else if(cn.value.trim().length<2 || !isName(cn.value.trim())){ bad(cn,'Client name must contain letters only (no numbers or symbols).'); } else good(cn);
+  var ph=document.getElementById('clientPhone');
+  var phClean=cleanPhone(ph.value||'');
+  if(!phClean){ bad(ph,'Phone / WhatsApp is required.'); }
+  else if(!/^[6-9][0-9]{9}$/.test(phClean)){ bad(ph,'Phone must be a valid 10-digit Indian mobile starting with 6, 7, 8 or 9 (optional +91).'); } else good(ph);
+  var em=document.getElementById('clientEmail');
+  if(em.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){ bad(em,'Email address looks invalid.'); } else good(em);
+  var cnNo=document.getElementById('contractNo');
+  if(cnNo.value.trim() && !/^[A-Za-z0-9-]+$/.test(cnNo.value.trim())){ bad(cnNo,'Contract No. may contain letters, numbers and hyphens only.'); } else good(cnNo);
+  if(currentEvent==='marriage'||currentEvent==='engagement'||currentEvent==='prewedding'){
+    ['brideName','groomName'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el.value.trim() && !isName(el.value.trim())) bad(el, (id==='brideName'?'Bride':'Groom')+" name must contain letters only.");
+      else good(el);
+    });
+  }
+  var city=document.getElementById('clientCity');
+  if(city.value.trim() && !isName(city.value.trim())){ bad(city,'City / Town must contain letters only.'); } else good(city);
+  var mainDateEl=document.getElementById('mainDate');
+  var mainD=parseDate(mainDateEl.value);
+  if(!mainDateEl.value){ bad(mainDateEl,'Main Event Date is required - date is fixed, time is optional.'); }
+  else if(mainD<todayMid){ bad(mainDateEl,'Main Event Date cannot be in the past.'); } else good(mainDateEl);
+  if(currentEvent==='other'){
+    var oe=document.getElementById('otherEventName');
+    if(!oe.value.trim()){ bad(oe,'For Other Event, please write what the event is.'); } else good(oe);
+  }
+  var pkg=document.getElementById('package');
+  if(!pkg.value){ bad(pkg,'Please select a package.'); } else good(pkg);
+  if(pkg.value.indexOf('Custom Package')===0){
+    var cp=document.getElementById('customPackage');
+    if(cp.value.trim().length<10){ bad(cp,'For a Custom Package, please write the package details (at least 10 characters).'); } else good(cp);
+  }
+  var anySvc=false; document.querySelectorAll('.svc:checked').forEach(function(){anySvc=true;});
+  if(!anySvc){ errors.push('Please tick at least one service included in this booking.'); }
+  var days=document.getElementById('days');
+  if(days.value!=='' && (!Number.isInteger(Number(days.value)) || Number(days.value)<1 || Number(days.value)>10)){ bad(days,'Number of Coverage Days must be a whole number from 1 to 10.'); } else good(days);
+  [['clientAddress','Address'],['venue','Main Venue'],['notes','Special Notes']].forEach(function(pair){
+    var el=document.getElementById(pair[0]);
+    if(hasLink(el.value)){ bad(el, pair[1]+' must not contain a website link.'); } else good(el);
+  });
+  var tot=total.value==='' ? null : Number(total.value);
+  var advV=adv.value==='' ? null : Number(adv.value);
+  var balV=bal.value==='' ? null : Number(bal.value);
+  if(tot!==null && (tot<=0 || tot>10000000)){ bad(total,'Total Package Amount must be between Rs.1 and Rs.1,00,00,000.'); } else good(total);
+  if(advV!==null && (advV<0 || advV>10000000)){ bad(adv,'Advance Received must be between Rs.0 and Rs.1,00,00,000.'); } else good(adv);
+  if(tot!==null && advV!==null && advV>tot){ bad(adv,'Advance Received cannot be more than the Total Package Amount.'); }
+  if(tot!==null && advV!==null && balV!==null && balV!==tot-advV){ bad(bal,'Balance Due must equal Total minus Advance.'); } else good(bal);
+  if((tot!==null || advV!==null) && tot===null){ bad(total,'Total Package Amount is required if an advance is entered.'); }
+  var pm=document.getElementById('payMode');
+  if((tot!==null || advV!==null) && !pm.value){ bad(pm,'Payment Mode is required when a payment amount is entered.'); } else good(pm);
+  var active=document.querySelector('.event-section.active');
+  var schedDates=0; var schedBad=false;
+  if(active){
+    active.querySelectorAll('tr').forEach(function(row){
+      var cells=row.querySelectorAll('td'); if(cells.length<4) return;
+      var nameCell=cells[0];
+      var nameInput=nameCell.querySelector('input');
+      var funcName=nameInput ? nameInput.value.trim() : nameCell.textContent.trim();
+      var dateEl=row.querySelector('.sched-date');
+      var timeEl=row.querySelector('input[type="time"]');
+      var venueEl=cells[3].querySelector('input');
+      var hasTime=timeEl && timeEl.value; var hasVenue=venueEl && venueEl.value.trim();
+      if(dateEl && dateEl.value){
+        schedDates++;
+        var sd2=parseDate(dateEl.value);
+        if(sd2<todayMid){ bad(dateEl,'Schedule dates cannot be in the past.'); schedBad=true; }
+        else if(mainD && Math.abs(sd2-mainD) > 30*24*60*60*1000){ bad(dateEl,'Schedule date must be within 30 days of the Main Event Date.'); schedBad=true; }
+        else good(dateEl);
+        if(nameInput && !funcName){ bad(nameInput,'A schedule row with a date must also have a function name.'); schedBad=true; }
+      } else {
+        if(hasTime || hasVenue){ bad(dateEl,'A schedule row with a time or venue must also have a date.'); schedBad=true; }
+        if(nameInput && funcName && !dateEl.value){ bad(dateEl,'A schedule row with a function name must also have a date.'); schedBad=true; }
+      }
+    });
+  }
+  if(!schedBad && schedDates===0){ errors.push('Please fill at least one date in the selected event schedule.'); }
+  var accept=document.getElementById('acceptTerms');
+  if(!accept.checked){ errors.push('Please tick "I have read and accept the contract terms above" before printing.'); }
+  if(!((py && py.checked) ^ (pn && pn.checked))){ errors.push('Please choose exactly one Portfolio Permission - YES or NO, not both and not neither.'); }
+  var box=document.getElementById('errorBox');
+  if(errors.length){
+    if(box){ box.classList.add('show'); box.innerHTML='<b>Please fix these before printing:</b><ul>'+errors.map(function(e){return '<li>'+e+'</li>'}).join('')+'</ul>'; }
+    if(firstBad && firstBad.focus) firstBad.focus();
+    else if(box) box.scrollIntoView({behavior:'smooth',block:'center'});
+    return false;
+  }
+  if(box){ box.classList.remove('show'); box.innerHTML=''; }
+  return true;
+}
+function expandTextareasForPrint(){
+  document.querySelectorAll('textarea').forEach(function(ta){
+    ta.style.height='auto'; ta.style.height=Math.max(36, ta.scrollHeight)+'px';
+  });
+}
 function printContract(){
-  var mainDate=document.getElementById('mainDate');
-  if(!mainDate.value){ alert('Please fill the Main Event Date first — date is required. Time is optional.'); mainDate.focus(); return; }
+  if(!validateContract()) return;
+  expandTextareasForPrint();
   window.print();
 }
 function sendWhatsApp(){
+  if(!validateContract()) return;
   var name=document.getElementById('clientName').value||'[Name]';
   var pkg=document.getElementById('package').value||'As per quotation';
   var date=document.getElementById('mainDate').value||'[Date]';
@@ -354,6 +523,8 @@ function sendWhatsApp(){
   var msg='Hello Sora Films! I have filled the booking contract.\n\nEvent: '+label.textContent+'\nName: '+name+'\nMain Date: '+date+'\nPackage: '+pkg+'\nServices: '+(svcs.length?svcs.join(', '):'As discussed')+'\nVenue: '+(document.getElementById('venue').value||'As discussed');
   window.open('https://wa.me/919155104962?text='+encodeURIComponent(msg), '_blank');
 }
+setCoupleVisibility();
 </script>
+
 </body>
 </html>
