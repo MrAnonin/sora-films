@@ -10,94 +10,94 @@
 <style>
 :root{--maroon:#6d1220;--dark:#450a14;--gold:#b3872c;--gold-bright:#eec96a;--bg:#faf6ee;--ink:#2b1d1d;--soft:#6b5a5a;--line:#d8c9a8;--paper:#fffdf7}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.5}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45}
 a{color:var(--maroon)}
 .topbar{background:var(--dark);color:#fdf3e0;padding:10px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
 .topbar a{color:var(--gold-bright);text-decoration:none}
-.wrap{max-width:900px;margin:0 auto;padding:22px 18px 60px}
-header.brand{text-align:center;border:3px double var(--gold);background:var(--paper);padding:26px 20px 20px;border-radius:4px}
+.wrap{max-width:900px;margin:0 auto;padding:16px 16px 40px}
+header.brand{text-align:center;border:3px double var(--gold);background:var(--paper);padding:20px 16px 14px;border-radius:4px}
 header.brand .small{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--gold);font-weight:600}
-header.brand h1{font-family:"Rozha One","Playfair Display",serif;font-size:42px;margin:6px 0 2px;color:var(--maroon);line-height:1.1}
+header.brand h1{font-family:"Rozha One","Playfair Display",serif;font-size:36px;margin:4px 0 2px;color:var(--maroon);line-height:1.1}
 header.brand .tag{font-family:"Playfair Display",serif;font-style:italic;color:var(--soft);margin:0}
 header.brand .contact{margin-top:14px;font-size:14px;color:var(--soft)}
 header.brand .contact b{color:var(--ink)}
-h2{font-family:"Playfair Display",serif;color:var(--maroon);font-size:24px;margin:34px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--gold)}
-h3{font-family:"Playfair Display",serif;color:var(--maroon);font-size:19px;margin:22px 0 8px}
-p.note{color:var(--soft);font-size:14px;margin:4px 0 14px}
+h2{font-family:"Playfair Display",serif;color:var(--maroon);font-size:21px;margin:24px 0 5px;padding-bottom:6px;border-bottom:2px solid var(--gold)}
+h3{font-family:"Playfair Display",serif;color:var(--maroon);font-size:17px;margin:16px 0 6px}
+p.note{color:var(--soft);font-size:13px;margin:3px 0 10px}
 label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
 label .opt{font-weight:400;color:var(--soft)}
-input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-size:15px;color:var(--ink)}
+input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-size:14px;color:var(--ink)}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
-textarea{resize:vertical;min-height:70px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+textarea{resize:vertical;min-height:56px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .field{margin-bottom:2px}
 .req{color:#a00}
 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
-.tab{border:2px solid var(--gold);background:#fff;color:var(--maroon);padding:10px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px}
+.tab{border:2px solid var(--gold);background:#fff;color:var(--maroon);padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px}
 .tab[aria-pressed=true]{background:var(--maroon);color:#fff;border-color:var(--maroon)}
-.event-section{display:none;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:18px;margin-top:14px}
+.event-section{display:none;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:14px;margin-top:10px}
 .event-section.active{display:block}
-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
-th{background:var(--maroon);color:#fff;text-align:left;padding:10px 9px;font-size:13px}
-td{padding:8px 7px;border-bottom:1px solid #e6dcc2;vertical-align:top}
+table{width:100%;border-collapse:collapse;margin:7px 0;font-size:13px}
+th{background:var(--maroon);color:#fff;text-align:left;padding:8px 8px;font-size:12.5px}
+td{padding:6px 6px;border-bottom:1px solid #e6dcc2;vertical-align:top}
 td.event{font-weight:600;width:34%}
 td input{padding:8px 9px}
 .checks{display:flex;flex-wrap:wrap;gap:8px 18px;margin:8px 0}
 .checks label{font-weight:400;display:flex;gap:7px;align-items:center;margin:0}
 .checks input{width:17px;height:17px;accent-color:var(--maroon)}
-.terms{font-size:14px}
+.terms{font-size:13.5px}
 .terms ol{padding-left:20px;margin:8px 0}
-.terms li{margin-bottom:8px}
-.sig{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
-.sigbox{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:18px;min-height:230px}
+.terms li{margin-bottom:6px}
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.sigbox{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:14px;min-height:195px}
 .sigbox h3{margin-top:0}
-.stamp{border:2px dashed var(--gold);border-radius:10px;height:86px;display:grid;place-items:center;color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:10px 0}
-.signline{border-bottom:1px solid var(--ink);height:42px;margin:8px 0 4px}
-.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 8px}
-button,.btn{border:0;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px}
+.stamp{border:2px dashed var(--gold);border-radius:10px;height:70px;display:grid;place-items:center;color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0}
+.signline{border-bottom:1px solid var(--ink);height:34px;margin:6px 0 4px}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}
+button,.btn{border:0;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px}
 .btn-maroon{background:var(--maroon);color:#fff}
 .btn-gold{background:var(--gold);color:#fff}
 .btn-outline{background:#fff;color:var(--maroon);border:2px solid var(--maroon)}
-.hint{background:#fff8e6;border:1px solid var(--gold);border-radius:10px;padding:12px 14px;font-size:14px}
+.hint{background:#fff8e6;border:1px solid var(--gold);border-radius:10px;padding:10px 12px;font-size:13.5px}
 .errorbox{display:none;background:#fff1f1;border:2px solid #b42318;border-radius:10px;padding:12px 14px;font-size:14px;color:#7a1a12;margin:14px 0}
 .errorbox.show{display:block}
 .errorbox ul{margin:6px 0 0 18px;padding:0}
 .field-error input,.field-error select,.field-error textarea{border-color:#b42318!important;outline:2px solid #f0b8b2!important}
 .print-block{margin:0}
-footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
+footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 @media(max-width:640px){.grid,.grid3,.sig{grid-template-columns:1fr}header.brand h1{font-size:34px}.tablewrap{overflow-x:auto}table{min-width:620px}}
 @media print{
-  @page{size:A4;margin:12mm 13mm}
+  @page{size:A4;margin:11mm 12mm}
   html,body{background:#fff}
-  body{font-size:11.5px;line-height:1.35}
+  body{font-size:11px;line-height:1.3}
   .no-print,.errorbox{display:none!important}
   .wrap{max-width:none;padding:0}
-  header.brand{border-width:2px;padding:14px 12px;break-inside:avoid;page-break-inside:avoid}
-  header.brand h1{font-size:30px}
+  header.brand{border-width:2px;padding:11px 10px;break-inside:avoid;page-break-inside:avoid}
+  header.brand h1{font-size:28px}
   header.brand .contact{font-size:12px}
   /* No block is ever cut in half: a whole section moves to the next page instead. */
   .print-block{break-inside:avoid;page-break-inside:avoid;break-after:auto}
-  h2{font-size:17px;margin:14px 0 5px;padding-bottom:5px;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}
-  h3{font-size:15px;margin:10px 0 6px;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}
+  h2{font-size:15px;margin:10px 0 4px;padding-bottom:4px;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}
+  h3{font-size:14px;margin:8px 0 5px;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}
   p.note{font-size:12px;margin:2px 0 8px;break-inside:avoid;page-break-inside:avoid}
   .grid,.grid3,.checks,.field,.tablewrap,.event-section,.terms,.sig{break-inside:avoid;page-break-inside:avoid}
   .event-section{display:none!important;border:0;padding:0}
   .event-section.active{display:block!important}
-  table{font-size:11.5px;margin:6px 0;break-inside:avoid;page-break-inside:avoid}
-  th{padding:6px 7px;font-size:11.5px}
-  td{padding:5px 6px}
+  table{font-size:11px;margin:5px 0;break-inside:avoid;page-break-inside:avoid}
+  th{padding:5px 6px;font-size:11px}
+  td{padding:4px 5px}
   tr{break-inside:avoid;page-break-inside:avoid}
-  .terms{font-size:12px}
+  .terms{font-size:11.5px}
   .terms ol{margin:4px 0}
-  .terms li{margin-bottom:4px;break-inside:avoid;page-break-inside:avoid;orphans:3;widows:3}
-  .sigbox{min-height:195px;padding:14px;break-inside:avoid;page-break-inside:avoid}
-  .stamp{height:72px}
-  .signline{height:34px}
-  input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{border:0;border-bottom:1px solid #999;border-radius:0;padding:3px 2px;background:transparent;font-size:11.5px}
+  .terms li{margin-bottom:3px;break-inside:avoid;page-break-inside:avoid;orphans:3;widows:3}
+  .sigbox{min-height:170px;padding:11px;break-inside:avoid;page-break-inside:avoid}
+  .stamp{height:62px}
+  .signline{height:28px}
+  input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{border:0;border-bottom:1px solid #999;border-radius:0;padding:2px 2px;background:transparent;font-size:11px}
   select{appearance:none}
   textarea{min-height:36px;height:auto;overflow:visible;white-space:pre-wrap;word-wrap:break-word}
-  footer{margin-top:18px;break-inside:avoid;page-break-inside:avoid}
+  footer{margin-top:12px;break-inside:avoid;page-break-inside:avoid}
   a{color:inherit;text-decoration:none}
 }
 </style>
@@ -105,7 +105,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <body>
 <div class="topbar no-print"><span>← <a href="index.html">Back to Sora Films website</a></span><span>Fill on screen, then print — or save as PDF from the print window.</span></div>
 <main class="wrap">
-<form id="contractForm">
+<form id="contractForm" novalidate>
 <header class="brand">
 <div class="small">Booking Contract &nbsp;•&nbsp; Sora Films</div>
 <h1>Sora Films</h1>
@@ -119,7 +119,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <a class="btn btn-outline" href="index.html">Back to Website</a>
 </div>
 <p class="hint"><b>How to use:</b> Choose your event type below, fill the details, check the contract lines, sign both blocks, then press <b>Print Contract</b>. In the print window you can also choose <b>Save as PDF</b> to keep a digital copy. Date is required; time is optional everywhere.</p>
-<p class="hint no-print"><b>Form rules — irrelevant entries are blocked before printing:</b> dates cannot be in the past; phone must be a valid 10-digit Indian mobile (with optional +91); names must contain letters only; advance cannot be more than the total; a schedule row with a time or venue but no date is not accepted; fields that do not apply to the chosen event (for example, bride/groom names on a birthday contract) are hidden and cannot be printed; and you must tick “I have read and accept” plus exactly one Portfolio Permission choice before printing.</p>
+<p class="hint no-print"><b>Form rules:</b> Contract date from 2000 onward (any future year); Sora Films stamp date from 2000 onward, including future dates; client signature date from 2010 onward. Event dates cannot be in the past. Phone must be a valid 10-digit Indian mobile. Email is optional — leaving it blank will not block printing. Fields that do not apply to the chosen event are hidden. Tick “accept terms” and exactly one Portfolio choice before printing.</p>
 <div id="errorBox" class="errorbox no-print" role="alert"></div>
 
 <div class="print-block"><h2>1 &nbsp;•&nbsp; Choose Your Event</h2>
@@ -133,7 +133,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <p class="note">Selected event: <b id="selectedEventLabel">Marriage / Wedding</b>. Only the selected event's schedule will print.</p>
 <div class="grid">
 <div class="field"><label for="contractNo">Contract No. <span class="opt">(to be filled by Sora Films)</span></label><input id="contractNo" type="text" placeholder="e.g. SF-2026-___" maxlength="20"></div>
-<div class="field"><label for="contractDate">Contract Date <span class="req">*</span></label><input id="contractDate" type="date" required></div>
+<div class="field"><label for="contractDate">Contract Date <span class="req">*</span></label><input id="contractDate" type="date" required min="2000-01-01"></div>
 </div></div>
 <div class="print-block"><h2>2 &nbsp;•&nbsp; Client Details</h2>
 <div class="grid">
@@ -277,19 +277,19 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <div class="print-block"><h2>7 &nbsp;•&nbsp; Contract Terms — Please read before signing</h2>
 <div class="terms">
 <ol>
-<li><b>Booking &amp; Confirmation:</b> Booking is confirmed only after the client accepts these terms, the date is available, and the agreed advance is received. Package details and the payment schedule should be recorded in the quotation or invoice.</li>
-<li><b>Payments:</b> The client agrees to pay the agreed package price on schedule. Unless agreed otherwise in writing, the remaining balance is due on or before the event date. Deliverables may be held until outstanding payments are cleared, subject to applicable law.</li>
-<li><b>Cancellation &amp; Rescheduling:</b> Cancellation or date changes must be communicated in writing. Any refund, cancellation fee, or rescheduling charge will follow the written quotation and applicable law. A new date depends on availability; costs already incurred may remain payable.</li>
-<li><b>Coverage &amp; Timings:</b> Coverage is limited to the dates, venues, hours, and services listed in this contract. The client should share the event schedule and key-moment list in advance. Delays, restrictions, or events extending beyond booked hours may reduce coverage or incur agreed overtime charges.</li>
-<li><b>Deliverables &amp; Delivery:</b> Only the items listed in the package are included — such as edited photographs, films, albums, or highlights. The estimated delivery time is confirmed in your quotation. Rush delivery, extra edits, albums, prints, and additional films may cost extra.</li>
-<li><b>Editing &amp; Creative Style:</b> The client has reviewed Sora Films' portfolio and understands that editing, colour grading, composition, and storytelling reflect the studio's style. RAW photos, unedited footage, and project files are not included unless agreed in writing.</li>
-<li><b>Client Responsibilities:</b> The client will provide accurate event details, venue access, required permissions, a point of contact, and reasonable meals and rest breaks for long coverage. The client is responsible for venue permissions and for notifying the studio about restrictions or no-photography areas.</li>
-<li><b>Travel &amp; Overtime:</b> Travel, accommodation, parking, permits, taxes, and other expenses are included only if specified in the quotation. Extra hours or additional services require client approval and will be charged at the rate agreed in writing.</li>
-<li><b>Equipment &amp; Uncontrollable Events:</b> Sora Films will take reasonable care of equipment and files. In case of illness, accident, equipment failure, severe weather, venue restrictions, or events beyond reasonable control, the studio will make reasonable efforts to arrange a suitable replacement or recover available work. Any liability is subject to applicable law.</li>
-<li><b>Copyright &amp; Personal Use:</b> Unless otherwise agreed in writing, copyright remains with the photographer, subject to applicable law. After full payment, the client receives a personal-use licence to download, print, and share delivered images for non-commercial purposes. Commercial use or major alterations require written permission.</li>
-<li><b>Portfolio Permission:</b> Sora Films may use selected images or clips for portfolio, website, social media, competitions, or promotion only if the client grants permission below. Permission is optional and declining it will not affect the booking.</li>
-<li><b>Privacy &amp; Complaints:</b> The studio will take reasonable steps to handle client files responsibly. Please raise concerns in writing within 14 days of delivery so both parties can try to resolve them fairly. Nothing in these terms limits rights or remedies that cannot legally be excluded under applicable law.</li>
-<li><b>Information Accuracy &amp; Restrictions:</b> The client must give accurate, relevant details only — a valid Indian mobile number, correct event dates (never in the past), and only the functions, services and figures that apply to this booking. Irrelevant, false or incomplete details may be asked to be corrected before the booking is confirmed, and the studio is not responsible for coverage missed because the schedule given was wrong.</li>
+<li><b>Booking &amp; Confirmation:</b> Booking is confirmed after you accept these terms, the date is available, and the agreed advance is received. Package and payment details are in the quotation or invoice.</li>
+<li><b>Payments:</b> Pay the agreed package price on schedule. Unless agreed otherwise in writing, the balance is due on or before the event date. Deliverables may be held until payment is cleared, subject to applicable law.</li>
+<li><b>Cancellation &amp; Rescheduling:</b> Tell us about cancellation or date changes in writing. Refunds, fees or rescheduling charges follow the written quotation and applicable law. A new date depends on availability; costs already incurred may still be payable.</li>
+<li><b>Coverage &amp; Timings:</b> Coverage covers only the dates, venues, hours and services in this contract. Share the event schedule and key moments in advance. Delays, restrictions or extra hours may reduce coverage or incur agreed overtime charges.</li>
+<li><b>Deliverables &amp; Delivery:</b> Only listed items are included — edited photos, films, albums or highlights. Delivery time is confirmed in your quotation. Rush delivery, extra edits, albums, prints and extra films may cost extra.</li>
+<li><b>Editing &amp; Creative Style:</b> You have seen our portfolio and accept that editing, colour grading, composition and storytelling reflect our style. RAW photos, unedited footage and project files are not included unless agreed in writing.</li>
+<li><b>Client Responsibilities:</b> Provide accurate event details, venue access, permissions, a point of contact, and reasonable meals and rest breaks for long coverage. You are responsible for venue permissions and for telling us about no-photography areas.</li>
+<li><b>Travel &amp; Overtime:</b> Travel, stay, parking, permits, taxes and other expenses are included only if stated in the quotation. Extra hours or services need your approval and are charged at the rate agreed in writing.</li>
+<li><b>Equipment &amp; Uncontrollable Events:</b> We will take reasonable care of equipment and files. For illness, accident, equipment failure, severe weather, venue restrictions or events beyond reasonable control, we will try to arrange a replacement or recover available work. Liability is subject to applicable law.</li>
+<li><b>Copyright &amp; Personal Use:</b> Unless agreed otherwise in writing, copyright stays with the photographer, subject to applicable law. After full payment, you may download, print and share delivered images for personal, non-commercial use. Commercial use or major changes need written permission.</li>
+<li><b>Portfolio Permission:</b> We may use selected images or clips for portfolio, website, social media, competitions or promotion only if you grant permission below. Permission is optional and refusing it will not affect your booking.</li>
+<li><b>Privacy &amp; Complaints:</b> We will handle client files responsibly. Raise concerns in writing within 14 days of delivery so we can resolve them fairly. Nothing here limits rights that cannot legally be excluded.</li>
+<li><b>Information Accuracy &amp; Restrictions:</b> Give accurate, relevant details only — a valid Indian mobile, correct event dates, and only functions, services and figures for this booking. Wrong or irrelevant details may need correction before confirmation, and we are not responsible for coverage missed because the schedule given was wrong.</li>
 </ol>
 <p>Full details are in the <a href="index.html#/policies">Terms &amp; Policies</a> on the Sora Films website. In case of any difference, the written quotation for this booking will apply to price, package and delivery.</p>
 <div class="checks">
@@ -307,7 +307,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <div class="field"><label>Signature</label><div class="signline"></div></div>
 <div class="grid">
 <div class="field"><label for="soraName">Name</label><input id="soraName" type="text" placeholder="Sora Films representative" maxlength="60"></div>
-<div class="field"><label for="soraDate">Date</label><input id="soraDate" type="date"></div>
+<div class="field"><label for="soraDate">Date</label><input id="soraDate" type="date" min="2000-01-01"></div>
 </div>
 <p class="note">Pantnagar, Gaya Ji, Bihar 823001 • +91 91551 04962</p>
 </div>
@@ -317,7 +317,7 @@ footer{margin-top:36px;text-align:center;color:var(--soft);font-size:13px}
 <div class="field"><label>Signature</label><div class="signline"></div></div>
 <div class="grid">
 <div class="field"><label for="clientSignName">Name (in block letters)</label><input id="clientSignName" type="text" placeholder="Full name" maxlength="60"></div>
-<div class="field"><label for="clientSignDate">Date</label><input id="clientSignDate" type="date"></div>
+<div class="field"><label for="clientSignDate">Date</label><input id="clientSignDate" type="date" min="2010-01-01"></div>
 </div>
 </div>
 </div></div>
@@ -353,7 +353,8 @@ function selectEvent(key, name){
     var other=document.getElementById('otherEventName');
     if(other && other.value){ mainEvent.value=other.value; }
   }
-  setCoupleVisibility();
+  var cf2=document.getElementById('contractForm'); if(cf2){ cf2.addEventListener('submit', function(e){ e.preventDefault(); }); }
+setCoupleVisibility();
 }
 tabs.forEach(function(t){
   t.addEventListener('click', function(){ selectEvent(t.dataset.event, t.textContent.trim()); });
@@ -362,11 +363,11 @@ var otherInput=document.getElementById('otherEventName');
 if(otherInput){ otherInput.addEventListener('input', function(){ mainEvent.value=otherInput.value; }); }
 var today=new Date(); today.setHours(0,0,0,0);
 var todayStr=today.toISOString().slice(0,10);
-var cd=document.getElementById('contractDate'); if(cd && !cd.value) cd.value=todayStr; if(cd) cd.max=todayStr;
+var cd=document.getElementById('contractDate'); if(cd && !cd.value) cd.value=todayStr; if(cd){ cd.min='2000-01-01'; cd.removeAttribute('max'); }
 var md=document.getElementById('mainDate'); if(md) md.min=todayStr;
 document.querySelectorAll('.sched-date').forEach(function(d){ d.min=todayStr; });
-var sd=document.getElementById('soraDate'); if(sd) sd.max=todayStr;
-var csd=document.getElementById('clientSignDate'); if(csd) csd.max=todayStr;
+var sd=document.getElementById('soraDate'); if(sd){ sd.min='2000-01-01'; sd.removeAttribute('max'); }
+var csd=document.getElementById('clientSignDate'); if(csd){ csd.min='2010-01-01'; csd.removeAttribute('max'); }
 var total=document.getElementById('totalAmt'), adv=document.getElementById('advanceAmt'), bal=document.getElementById('balanceAmt');
 function calcBalance(){
   if(total.value!=='' && adv.value!==''){
@@ -412,7 +413,7 @@ function validateContract(){
   function parseDate(v){ if(!v) return null; var d=new Date(v+'T00:00:00'); return isNaN(d)?null:d; }
   var contractDateEl=document.getElementById('contractDate');
   if(!contractDateEl.value){ bad(contractDateEl,'Contract Date is required.'); }
-  else if(parseDate(contractDateEl.value)>todayMid){ bad(contractDateEl,'Contract Date cannot be in the future.'); } else good(contractDateEl);
+  else if(parseDate(contractDateEl.value)<new Date('2000-01-01T00:00:00')){ bad(contractDateEl,'Contract Date cannot be before 1 January 2000.'); } else good(contractDateEl);
   var cn=document.getElementById('clientName');
   if(!cn.value.trim()){ bad(cn,'Client name is required.'); }
   else if(cn.value.trim().length<2 || !isName(cn.value.trim())){ bad(cn,'Client name must contain letters only (no numbers or symbols).'); } else good(cn);
@@ -421,7 +422,8 @@ function validateContract(){
   if(!phClean){ bad(ph,'Phone / WhatsApp is required.'); }
   else if(!/^[6-9][0-9]{9}$/.test(phClean)){ bad(ph,'Phone must be a valid 10-digit Indian mobile starting with 6, 7, 8 or 9 (optional +91).'); } else good(ph);
   var em=document.getElementById('clientEmail');
-  if(em.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){ bad(em,'Email address looks invalid.'); } else good(em);
+  if(em.value.trim()===''){ good(em); }
+  else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){ bad(em,'Email address looks invalid.'); } else good(em);
   var cnNo=document.getElementById('contractNo');
   if(cnNo.value.trim() && !/^[A-Za-z0-9-]+$/.test(cnNo.value.trim())){ bad(cnNo,'Contract No. may contain letters, numbers and hyphens only.'); } else good(cnNo);
   if(currentEvent==='marriage'||currentEvent==='engagement'||currentEvent==='prewedding'){
@@ -491,6 +493,10 @@ function validateContract(){
     });
   }
   if(!schedBad && schedDates===0){ errors.push('Please fill at least one date in the selected event schedule.'); }
+  var soraD=document.getElementById('soraDate');
+  if(soraD.value){ var sdVal=parseDate(soraD.value); if(sdVal && sdVal<new Date('2000-01-01T00:00:00')){ bad(soraD,'Sora Films signature date cannot be before 1 January 2000.'); } else good(soraD); }
+  var cliD=document.getElementById('clientSignDate');
+  if(cliD.value){ var cdVal=parseDate(cliD.value); if(cdVal && cdVal<new Date('2010-01-01T00:00:00')){ bad(cliD,'Client signature date cannot be before 1 January 2010.'); } else good(cliD); }
   var accept=document.getElementById('acceptTerms');
   if(!accept.checked){ errors.push('Please tick "I have read and accept the contract terms above" before printing.'); }
   if(!((py && py.checked) ^ (pn && pn.checked))){ errors.push('Please choose exactly one Portfolio Permission - YES or NO, not both and not neither.'); }
@@ -523,6 +529,7 @@ function sendWhatsApp(){
   var msg='Hello Sora Films! I have filled the booking contract.\n\nEvent: '+label.textContent+'\nName: '+name+'\nMain Date: '+date+'\nPackage: '+pkg+'\nServices: '+(svcs.length?svcs.join(', '):'As discussed')+'\nVenue: '+(document.getElementById('venue').value||'As discussed');
   window.open('https://wa.me/919155104962?text='+encodeURIComponent(msg), '_blank');
 }
+var cf2=document.getElementById('contractForm'); if(cf2){ cf2.addEventListener('submit', function(e){ e.preventDefault(); }); }
 setCoupleVisibility();
 </script>
 
