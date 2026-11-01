@@ -271,6 +271,7 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <div class="field"><label for="advanceAmt">Advance Received (₹)</label><input id="advanceAmt" type="number" min="0" max="10000000" step="1" placeholder="Amount received"></div>
 <div class="field"><label for="balanceAmt">Balance Due (₹)</label><input id="balanceAmt" type="number" min="0" max="10000000" step="1" placeholder="Auto-calculated, or fill manually"></div>
 </div>
+<p class="note no-print" id="payCalcNote" style="display:none;color:#b42318">Advance cannot be more than Total Package Amount. Please correct Advance or Total — Balance Due will be calculated again once Advance is within Total.</p>
 <div class="grid">
 <div class="field"><label for="payMode">Payment Mode</label><select id="payMode"><option value="">Select</option><option>Cash</option><option>UPI</option><option>Bank Transfer</option><option>Other</option></select></div>
 <div class="field"><label for="deliveryNote">Delivery</label><input id="deliveryNote" type="text" value="Confirmed in your quotation" placeholder="Confirmed in your quotation" maxlength="80"></div>
@@ -370,14 +371,23 @@ document.querySelectorAll('.sched-date').forEach(function(d){ d.min=todayStr; })
 var sd=document.getElementById('soraDate'); if(sd){ sd.min='2000-01-01'; sd.removeAttribute('max'); }
 var csd=document.getElementById('clientSignDate'); if(csd){ csd.min='2010-01-01'; csd.removeAttribute('max'); }
 var total=document.getElementById('totalAmt'), adv=document.getElementById('advanceAmt'), bal=document.getElementById('balanceAmt');
+var balAuto=false;
 function calcBalance(){
+  var note=document.getElementById('payCalcNote');
   if(total.value!=='' && adv.value!==''){
     var b=Number(total.value)-Number(adv.value);
-    if(!isNaN(b) && b>=0) bal.value=b;
+    if(!isNaN(b) && b>=0){ bal.value=b; balAuto=true; mark(adv,false); mark(bal,false); if(note) note.style.display='none'; }
+    else if(!isNaN(b) && b<0){ bal.value=''; balAuto=false; mark(adv,true); if(note) note.style.display='block'; }
+    else { bal.value=''; balAuto=false; if(note) note.style.display='none'; }
+  } else {
+    if(balAuto){ bal.value=''; balAuto=false; }
+    mark(adv,false);
+    if(note) note.style.display='none';
   }
 }
 if(total) total.addEventListener('input', calcBalance);
 if(adv) adv.addEventListener('input', calcBalance);
+if(bal) bal.addEventListener('input', function(){ balAuto=false; });
 var py=document.getElementById('portfolioYes'), pn=document.getElementById('portfolioNo');
 if(py && pn){
   py.addEventListener('change', function(){ if(py.checked) pn.checked=false; });
