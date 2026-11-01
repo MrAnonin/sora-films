@@ -120,7 +120,7 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <button type="button" class="btn-gold" onclick="sendWhatsApp()">Send details on WhatsApp</button>
 <a class="btn btn-outline" href="index.html">Back to Website</a>
 </div>
-<p class="hint"><b>How to use:</b> Choose your event type below, fill the details, check the contract lines, sign both blocks, then press <b>Print Contract</b>. In the print window you can also choose <b>Save as PDF</b> to keep a digital copy. Date is required; time is optional everywhere.</p>
+<p class="hint"><b>How to use:</b> Choose your event type below, fill the details, check the contract lines, sign both blocks, then press <b>Print Contract</b>. In the print window you can also choose <b>Save as PDF</b> to keep a digital copy. Only dates are needed — there are no time fields in this contract.</p>
 <p class="hint no-print"><b>Form rules:</b> Contract date from 2000 onward (any future year); Sora Films stamp date from 2000 onward, including future dates; client signature date from 2010 onward. Event dates cannot be in the past. Phone must be a valid 10-digit Indian mobile. Email is optional — leaving it blank will not block printing. Fields that do not apply to the chosen event are hidden. Tick “accept terms” and exactly one Portfolio choice before printing.</p>
 <div id="errorBox" class="errorbox no-print" role="alert"></div>
 
@@ -155,28 +155,27 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <div class="grid">
 <div class="field"><label for="mainEventName">Event Name</label><input id="mainEventName" type="text" value="Marriage / Wedding" placeholder="e.g. Marriage, Engagement, Birthday"></div>
 <div class="field"><label for="mainDate">Main Event Date <span class="req">*</span></label><input id="mainDate" type="date" required></div>
-<div class="field"><label for="mainTime">Main Event Time <span class="opt">(optional)</span></label><input id="mainTime" type="time"></div>
 <div class="field"><label for="days">Number of Coverage Days</label><input id="days" type="number" min="1" max="10" step="1" placeholder="e.g. 2"></div>
 </div>
 <div class="field"><label for="venue">Main Venue Name &amp; Address</label><textarea id="venue" rows="2" placeholder="Venue, area, city" maxlength="200"></textarea></div>
 <div class="field"><label for="notes">Special Notes / Key Moments to Capture <span class="opt">(optional)</span></label><textarea id="notes" rows="3" placeholder="e.g. Family group photos, first look, drone shots at baraat" maxlength="300"></textarea></div></div>
-<div class="print-block"><h2>4 &nbsp;•&nbsp; Event Schedule — Date is required, Time is optional</h2>
-<p class="note">Fill the date for every function that will be covered. Leave a row blank if that function is not part of your event. Time and venue are optional in every row.</p>
+<div class="print-block"><h2>4 &nbsp;•&nbsp; Event Schedule — Dates only</h2>
+<p class="note">Fill the date for every function that will be covered. Leave a row blank if that function is not part of your event — blank rows will not print. Venue is optional in every row.</p>
 
 <!-- MARRIAGE -->
 <section class="event-section active" data-section="marriage" aria-label="Marriage schedule">
 <h3>Marriage / Wedding Schedule</h3>
 <div class="tablewrap"><table>
-<tr><th>Traditional Event / Function</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Haldi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Barat / Baraat</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Wedding Ceremony / Vivah / Pheras</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Reception</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Vidaai</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Other function — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><th>Traditional Event / Function</th><th>Date <span class="req">*</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
+<tr><td class="event">Haldi</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Barat / Baraat</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Wedding Ceremony / Vivah / Pheras</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Reception</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Vidaai</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other function — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section>
 
@@ -184,14 +183,14 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <section class="event-section" data-section="engagement" aria-label="Engagement schedule">
 <h3>Engagement Schedule</h3>
 <div class="tablewrap"><table>
-<tr><th>Function</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Engagement Ceremony / Sagai</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Ring Ceremony</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Family / Couple Photoshoot</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Other function — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><th>Function</th><th>Date <span class="req">*</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
+<tr><td class="event">Engagement Ceremony / Sagai</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Ring Ceremony</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Tilak</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Sangeet</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Mehndi</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Family / Couple Photoshoot</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other function — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section>
 
@@ -200,12 +199,12 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <h3>Birthday Schedule</h3>
 <div class="field"><label for="birthdayPerson">Birthday Person's Name &amp; Age <span class="opt">(optional)</span></label><input id="birthdayPerson" type="text" placeholder="e.g. Aarav — turning 5" maxlength="60"></div>
 <div class="tablewrap"><table>
-<tr><th>Function / Moment</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Birthday Celebration</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Cake Cutting</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Family &amp; Friends Photos</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td class="event">Games / Activities Coverage</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Other moment — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><th>Function / Moment</th><th>Date <span class="req">*</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
+<tr><td class="event">Birthday Celebration</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Cake Cutting</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Family &amp; Friends Photos</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td class="event">Games / Activities Coverage</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other moment — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section>
 
@@ -217,11 +216,11 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <div class="field"><label for="pwTheme">Theme / Outfit Notes <span class="opt">(optional)</span></label><input id="pwTheme" type="text" placeholder="e.g. Traditional + western outfits" maxlength="120"></div>
 </div>
 <div class="tablewrap"><table>
-<tr><th>Shoot Session</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Location <span class="opt">(optional)</span></th></tr>
-<tr><td class="event">Pre-Wedding Shoot — Day / Session 1</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
-<tr><td class="event">Pre-Wedding Shoot — Day / Session 2</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
-<tr><td class="event">Couple Teaser / Reel Shoot</td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Other session — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><th>Shoot Session</th><th>Date <span class="req">*</span></th><th>Location <span class="opt">(optional)</span></th></tr>
+<tr><td class="event">Pre-Wedding Shoot — Day / Session 1</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><td class="event">Pre-Wedding Shoot — Day / Session 2</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><td class="event">Couple Teaser / Reel Shoot</td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Other session — write here" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Location" maxlength="80"></td></tr>
 </table></div>
 </section>
 
@@ -230,11 +229,11 @@ footer{margin-top:24px;text-align:center;color:var(--soft);font-size:13px}
 <h3>Other Event Schedule</h3>
 <div class="field"><label for="otherEventName">What is the event? <span class="req">*</span></label><input id="otherEventName" type="text" placeholder="e.g. Anniversary, Baby Shower / Godh Bharai, Naming Ceremony, Corporate Event, Haldi-Kumkum" maxlength="80"></div>
 <div class="tablewrap"><table>
-<tr><th>Function / Session</th><th>Date <span class="req">*</span></th><th>Time <span class="opt">(optional)</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
-<tr><td><input type="text" placeholder="Function 1" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Function 2" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Function 3" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
-<tr><td><input type="text" placeholder="Function 4" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="time"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><th>Function / Session</th><th>Date <span class="req">*</span></th><th>Venue <span class="opt">(optional)</span></th></tr>
+<tr><td><input type="text" placeholder="Function 1" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Function 2" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Function 3" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
+<tr><td><input type="text" placeholder="Function 4" maxlength="40"></td><td><input type="date" class="sched-date"></td><td><input type="text" placeholder="Venue" maxlength="80"></td></tr>
 </table></div>
 </section></div>
 <div class="print-block"><h2>5 &nbsp;•&nbsp; Package &amp; Services</h2>
@@ -439,7 +438,7 @@ function validateContract(){
   if(city.value.trim() && !isName(city.value.trim())){ bad(city,'City / Town must contain letters only.'); } else good(city);
   var mainDateEl=document.getElementById('mainDate');
   var mainD=parseDate(mainDateEl.value);
-  if(!mainDateEl.value){ bad(mainDateEl,'Main Event Date is required - date is fixed, time is optional.'); }
+  if(!mainDateEl.value){ bad(mainDateEl,'Main Event Date is required.'); }
   else if(mainD<todayMid){ bad(mainDateEl,'Main Event Date cannot be in the past.'); } else good(mainDateEl);
   if(currentEvent==='other'){
     var oe=document.getElementById('otherEventName');
@@ -473,14 +472,13 @@ function validateContract(){
   var schedDates=0; var schedBad=false;
   if(active){
     active.querySelectorAll('tr').forEach(function(row){
-      var cells=row.querySelectorAll('td'); if(cells.length<4) return;
+      var cells=row.querySelectorAll('td'); if(cells.length<3) return;
       var nameCell=cells[0];
       var nameInput=nameCell.querySelector('input');
       var funcName=nameInput ? nameInput.value.trim() : nameCell.textContent.trim();
       var dateEl=row.querySelector('.sched-date');
-      var timeEl=row.querySelector('input[type="time"]');
-      var venueEl=cells[3].querySelector('input');
-      var hasTime=timeEl && timeEl.value; var hasVenue=venueEl && venueEl.value.trim();
+      var venueEl=cells[2].querySelector('input');
+      var hasVenue=venueEl && venueEl.value.trim();
       if(dateEl && dateEl.value){
         schedDates++;
         var sd2=parseDate(dateEl.value);
@@ -489,7 +487,7 @@ function validateContract(){
         else good(dateEl);
         if(nameInput && !funcName){ bad(nameInput,'A schedule row with a date must also have a function name.'); schedBad=true; }
       } else {
-        if(hasTime || hasVenue){ bad(dateEl,'A schedule row with a time or venue must also have a date.'); schedBad=true; }
+        if(hasVenue){ bad(dateEl,'A schedule row with a venue must also have a date.'); schedBad=true; }
         if(nameInput && funcName && !dateEl.value){ bad(dateEl,'A schedule row with a function name must also have a date.'); schedBad=true; }
       }
     });
@@ -517,6 +515,18 @@ function expandTextareasForPrint(){
     ta.style.height='auto'; ta.style.height=Math.max(36, ta.scrollHeight)+'px';
   });
 }
+var printHiddenRows=[];
+function hideEmptyScheduleRows(){
+  var hidden=[];
+  document.querySelectorAll('.event-section.active tr').forEach(function(row){
+    var dateEl=row.querySelector('.sched-date');
+    if(dateEl && !dateEl.value && row.style.display!=='none'){ hidden.push(row); row.style.display='none'; }
+  });
+  return hidden;
+}
+function restoreScheduleRows(hidden){ hidden.forEach(function(row){ row.style.display=''; }); }
+window.addEventListener('beforeprint', function(){ printHiddenRows=hideEmptyScheduleRows(); });
+window.addEventListener('afterprint', function(){ restoreScheduleRows(printHiddenRows); printHiddenRows=[]; });
 function printContract(){
   if(!validateContract()) return;
   expandTextareasForPrint();
