@@ -1164,6 +1164,48 @@
           <p>Two ranges to fit every celebration — complete wedding-day packages, and compact collections for smaller events. Capturing your special day, beautifully.</p>
         </div>
 
+
+        <!-- Package Finder quiz -->
+        <div class="custom-box rv" id="packageFinder">
+          <h3 style="margin-bottom:6px">Find Your Package in 30 Seconds</h3>
+          <p class="sub">Answer 3 quick questions and we will suggest the package that fits your day best. It is a starting point — we will confirm the final details with you on WhatsApp.</p>
+          <h4>1 · What is your event?</h4>
+          <div class="chip-grid" id="pfQ1">
+            <button type="button" class="opt" data-q="q1" data-value="wedding" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Wedding</button>
+            <button type="button" class="opt" data-q="q1" data-value="event" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Engagement / Birthday / Event</button>
+            <button type="button" class="opt" data-q="q1" data-value="unsure" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Not sure yet</button>
+          </div>
+          <h4>2 · How many days of coverage?</h4>
+          <div class="chip-grid" id="pfQ2">
+            <button type="button" class="opt" data-q="q2" data-value="1" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1 day</button>
+            <button type="button" class="opt" data-q="q2" data-value="2" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2 days</button>
+            <button type="button" class="opt" data-q="q2" data-value="3" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>3 days or more</button>
+            <button type="button" class="opt" data-q="q2" data-value="unsure" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Not sure yet</button>
+          </div>
+          <h4>3 · What matters most to you?</h4>
+          <div class="chip-grid" id="pfQ3">
+            <button type="button" class="opt" data-q="q3" data-value="simple" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Simple &amp; budget-friendly</button>
+            <button type="button" class="opt" data-q="q3" data-value="balanced" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>A good balance</button>
+            <button type="button" class="opt" data-q="q3" data-value="cinematic" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cinematic — reels &amp; highlight</button>
+            <button type="button" class="opt" data-q="q3" data-value="complete" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>The complete experience</button>
+          </div>
+          <p id="pfWarn" style="display:none;color:#b3261e;font-weight:600;margin-top:14px">Please answer all 3 questions above, then tap “Show My Package”.</p>
+          <div style="margin-top:16px"><button type="button" class="btn btn-gold" id="pfShow">Show My Package →</button></div>
+          <div id="pfResult" style="display:none;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)">
+            <p class="sub" style="margin-bottom:4px">Your suggested package</p>
+            <h3 id="pfName" style="margin:0 0 4px"></h3>
+            <p id="pfPrice" style="font-size:22px;font-weight:700;color:var(--gold-text);margin:0 0 8px"></p>
+            <p id="pfWhy" style="margin:0 0 6px"></p>
+            <p id="pfBased" class="sub" style="margin:0 0 14px"></p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <a class="btn btn-wa" id="pfWa" href="#" target="_blank" rel="noopener">Enquire on WhatsApp</a>
+              <a class="btn btn-ghost" id="pfEmail" href="#">Send by Email</a>
+              <button type="button" class="btn btn-ghost" id="pfAgain">Start Again</button>
+            </div>
+            <p class="sub" style="margin-top:10px">Email opens in your mail app with the details filled in — press Send there to send it to sorafilms25@gmail.com.</p>
+          </div>
+        </div>
+
         <!-- Group 1 : Wedding Packages -->
         <div class="pkg-group-head rv">
           <span class="pill">Wedding Packages</span>
@@ -1987,6 +2029,68 @@
             if (val("fMsg")) lines.push("Details: " + val("fMsg"));
             var subject = "Sora Films Enquiry" + (val("fType") ? " - " + val("fType") : "") + (val("fName") ? " - " + val("fName") : "");
             window.location.href = "mailto:sorafilms25@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n"));
+          });
+        }
+
+
+        /* Package Finder quiz — 3 questions, suggests a real package, WhatsApp + Email enquiry */
+        var pfBox = document.getElementById("packageFinder");
+        if (pfBox) {
+          var PF_PACKAGES = {
+            silver: {name: "Silver Wedding Package", price: "₹30,000", why: "1 day of drone coverage, a 30-page album, full wedding video and 4 photo frames — complete wedding coverage at the most budget-friendly price."},
+            gold: {name: "Gold Wedding Package", price: "₹42,000", why: "2 days of drone coverage, 2 reels, wedding highlight + full video, and a premium 30-page album with leather bag."},
+            platinum: {name: "Platinum Wedding Package", price: "₹59,999", why: "A cinematographer, 2 days of drone coverage, 3 reels, wedding highlight + teaser + full video, and a premium 40-page album with box — the complete cinematic experience."},
+            classic: {name: "Classic Collection", price: "₹20,000", why: "Photographer + videographer, album and full video — compact traditional video coverage for your celebration."},
+            signature: {name: "Signature Collection", price: "₹23,000", why: "Photographer + videographer, album, full video and 5 photo frames."},
+            royal: {name: "Royal Collection", price: "₹25,000", why: "Photographer + videographer, drone coverage, album, full video and 5 photo frames — our most popular Essential collection."}
+          };
+          function pfRecommend(q1, q2, q3) {
+            if (q1 === "event") {
+              if (q3 === "simple") return "classic";
+              if (q3 === "balanced") return "signature";
+              return "royal";
+            }
+            var tier = q3 === "simple" ? 0 : q3 === "complete" ? 2 : 1;
+            if (q2 === "2" && tier === 0) tier = 1;
+            if (q2 === "3") tier = Math.min(2, tier + 1);
+            return ["silver", "gold", "platinum"][tier];
+          }
+          function pfPicked(q) {
+            var b = pfBox.querySelector('#pfQ' + q.slice(1) + ' .opt.on');
+            return b ? b.getAttribute("data-value") : null;
+          }
+          function pfLabel(q) {
+            var b = pfBox.querySelector('#pfQ' + q.slice(1) + ' .opt.on');
+            return b ? b.textContent.trim() : "";
+          }
+          pfBox.addEventListener("click", function (e) {
+            var btn = e.target.closest ? e.target.closest(".opt") : null;
+            if (!btn || !pfBox.contains(btn)) return;
+            var group = btn.parentElement;
+            Array.prototype.forEach.call(group.querySelectorAll(".opt"), function (b) { b.classList.remove("on"); b.setAttribute("aria-pressed", "false"); });
+            btn.classList.add("on"); btn.setAttribute("aria-pressed", "true");
+          });
+          document.getElementById("pfShow").addEventListener("click", function () {
+            var q1 = pfPicked("q1"), q2 = pfPicked("q2"), q3 = pfPicked("q3");
+            var warn = document.getElementById("pfWarn"), result = document.getElementById("pfResult");
+            if (!q1 || !q2 || !q3) { warn.style.display = "block"; result.style.display = "none"; return; }
+            warn.style.display = "none";
+            var key = pfRecommend(q1, q2, q3);
+            var pkg = PF_PACKAGES[key];
+            document.getElementById("pfName").textContent = pkg.name;
+            document.getElementById("pfPrice").textContent = pkg.price;
+            document.getElementById("pfWhy").textContent = pkg.why;
+            document.getElementById("pfBased").textContent = "Based on your answers — " + pfLabel("q1") + " · " + pfLabel("q2") + " · " + pfLabel("q3") + ".";
+            var lines = ["Hello Sora Films! I used the Package Finder on your website.", "Event: " + pfLabel("q1"), "Coverage: " + pfLabel("q2"), "What matters most: " + pfLabel("q3"), "Suggested package: " + pkg.name + " — " + pkg.price, "Please confirm availability and details for my date."];
+            document.getElementById("pfWa").href = "https://wa.me/919155104962?text=" + encodeURIComponent(lines.join("\n"));
+            document.getElementById("pfEmail").href = "mailto:sorafilms25@gmail.com?subject=" + encodeURIComponent("Package Finder — " + pkg.name + " (" + pkg.price + ")") + "&body=" + encodeURIComponent(lines.join("\n"));
+            result.style.display = "block";
+            result.scrollIntoView({block: "nearest"});
+          });
+          document.getElementById("pfAgain").addEventListener("click", function () {
+            Array.prototype.forEach.call(pfBox.querySelectorAll(".opt.on"), function (b) { b.classList.remove("on"); b.setAttribute("aria-pressed", "false"); });
+            document.getElementById("pfResult").style.display = "none";
+            document.getElementById("pfWarn").style.display = "none";
           });
         }
 
