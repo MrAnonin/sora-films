@@ -3,6 +3,60 @@
 Live site: https://mranonin.github.io/sora-films/
 Repo: https://github.com/MrAnonin/sora-films (branch `main`)
 
+## Phase 3 — Structure, SEO & language (2026-11-08)
+
+- **3.16 Real pages instead of hash routing:** the site is no longer one
+  file with `#/page` sections. Each page is now a real address with its own
+  title, meta description and canonical: `/` (Home), `/about/`, `/services/`,
+  `/packages/`, `/gallery/`, `/contact/`, `/terms/` (the 14 Terms & Policies),
+  `/faq/` (the 8 questions, moved out of Contact — Contact now links to it).
+  The shared styling lives in `assets/css/style.css` and the shared
+  JavaScript in `assets/js/main.js`; page-specific features are guarded so
+  the one script runs safely on every page (the old hash router is gone).
+  Old `#/page` links redirect to the new pages automatically (including
+  `#/contact/faq` → `/faq/` and `#/packages/essential` →
+  `/packages/#essential`). Also added: `404.html` (noindex), `sitemap.xml`
+  (13 URLs) and `robots.txt`. Each page has exactly one `<h1>`. No colours,
+  content, prices, phone numbers or booking flows changed.
+- **3.17 Search-engine details (JSON-LD):** a `Photographer` / LocalBusiness
+  block on Home (name, Pantnagar address, geo 24.7624937, 85.002881, phones,
+  sorafilms25@gmail.com, price range from the real packages, Instagram +
+  YouTube, the 13 districts served) and an `FAQPage` block on the FAQ page
+  with all 8 questions and answers. No `aggregateRating` or review markup
+  (there are no real reviews on the site yet) and no opening hours (not
+  confirmed by the client).
+- **3.18 Local SEO copy:** the About page now names the places we shoot —
+  Gaya Ji, Bodh Gaya, Rajgir, Nalanda, Patna, Aurangabad and the surrounding
+  districts — and the FAQ travel answer already lists the full 100 km
+  coverage including Bihar Sharif. Every photo's alt text was audited: all
+  content images have descriptive alt text (the lightbox image's alt is set
+  by the script when it opens, which is correct for a dynamic image).
+- **3.19 Hindi toggle:** a हिंदी / English button in the header on every
+  page. It translates the navigation, hero, services strip, section
+  headings, date checker, enquiry form, the 8 FAQ questions and answers,
+  and the footer — 60 strings in `SORA_I18N` in `assets/js/main.js`. The
+  choice is remembered (localStorage) and the page language follows it.
+  The WhatsApp messages the visitor sends (enquiry, Package Finder, custom
+  builder, date checker) are also written in the language they chose.
+  **The Hindi wording is a first translation — please review it before
+  launch; any correction is a one-line change in `SORA_I18N`.**
+- **3.20 Real Weddings + gallery filters:** a Real Weddings listing page
+  (`/real-weddings/`) and three story templates (`/real-weddings/story-1/`,
+  `story-2/`, `story-3/`), all marked `[CLIENT TO PROVIDE]`. They are
+  **hidden from the main navigation** until real couples' stories and
+  photos are supplied. The Gallery page now has category filters — All,
+  Wedding, Pre-Wedding, Engagement, Drone — with the 8 photos tagged by
+  category; the Drone filter shows a short note until drone photos exist.
+  (Note: filtering the grid does not yet filter the lightbox's next/previous
+  navigation — a known small limitation.)
+- **3.21 About page:** a "Meet the Team" section (three photo slots) and
+  an "Our Studio Story" paragraph, both marked `[CLIENT TO PROVIDE]` —
+  replace them with real team members and the studio's story in its own
+  words.
+
+No colours, content, prices, phone numbers or booking flows changed in
+Phase 3, except the items above.
+
 ## Phase 2 — Performance, trust & leads (2026-11-08)
 
 - **2.7 Images moved out of the file:** all 9 unique photos are now

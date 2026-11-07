@@ -13,12 +13,19 @@ drone coverage, premium albums and video editing.
 
 ## Files in this repository
 
-- `index.html` — the complete website (single page, hash-routed sections:
-  Home, About, Services, Packages, Gallery, Contact/Booking, Terms & Policies).
-  Photos live in `assets/img/` (see below); only small decorative patterns
-  remain embedded.
+- `index.html` — the Home page (`/`). Each section of the site is now its
+  own real page (Phase 3): `about/`, `services/`, `packages/`, `gallery/`,
+  `contact/`, `terms/` (the 14 Terms & Policies), `faq/` (the 8 questions),
+  `real-weddings/` (hidden until real stories are ready). Old `#/page` links
+  redirect to the new pages automatically. Shared styling lives in
+  `assets/css/style.css` and shared JavaScript in `assets/js/main.js`.
 - `contract.html` — printable Booking Contract (Marriage/Wedding, Engagement,
   Birthday, Pre-Wedding, Other), linked from the footer as "Booking Contract".
+- `assets/css/style.css` — all of the site's styling, shared by every page.
+- `assets/js/main.js` — all of the site's JavaScript, shared by every page:
+  the `SORA_CONFIG` block (analytics, muhurat, showreel, testimonials, lead
+  capture), the enquiry/quiz/builder/date-checker handlers, the lightbox,
+  the gallery filters and the Hindi toggle (`SORA_I18N` translations).
 - `assets/img/` — all photos as separate files: each photo as `.jpg` and
   `.webp` (WebP first, JPEG fallback), plus a 480 px variant for small
   screens; `logo.png` is the one shared logo (header, footer, favicon),
@@ -26,13 +33,15 @@ drone coverage, premium albums and video editing.
 - `assets/data/booked-dates.json` — the list of booked dates
   (`YYYY-MM-DD`). The date checker reads it and marks those dates
   unavailable. Edit the list, nothing else.
+- `sitemap.xml` / `robots.txt` / `404.html` — search-engine sitemap,
+  crawler rules and the "Page Not Found" page.
 - `.nojekyll` — tells GitHub Pages to serve the files as-is.
 - `README.md` — this file. `CHANGELOG.md` — what changed, phase by phase.
 
 ## How to edit things (no code knowledge needed — ask Muse)
 
-Everything below is edited in `index.html` unless noted. Search for the
-exact text in quotes.
+Everything below is edited in `assets/js/main.js` (for settings) or in the
+page that shows it (for text). Search for the exact text in quotes.
 
 - **Prices:** the six packages are in the Packages page. Wedding packages:
   Silver ₹30,000, Gold ₹42,000, Platinum ₹59,999. Essential Collections:
@@ -40,10 +49,11 @@ exact text in quotes.
   package card **and** in the Package Finder quiz (`PF_PACKAGES`), the
   comparison table and the Booking Contract dropdown (`contract.html`) so
   all four match.
-- **Muhurat dates:** one place — the `SORA_CONFIG` block near the end of
-  `index.html` (`muhurat: { year, label, note, lastDate }`). The strip on the
-  homepage is drawn from it and hides itself automatically after `lastDate`.
-  **Verify every new set of dates against a panchang before publishing.**
+- **Muhurat dates:** one place — the `SORA_CONFIG` block in
+  `assets/js/main.js` (`muhurat: { year, label, note, lastDate }`). The strip
+  on the homepage is drawn from it and hides itself automatically after
+  `lastDate`. **Verify every new set of dates against a panchang before
+  publishing.**
 - **Analytics:** one place — `SORA_CONFIG.analyticsId`. Put your Plausible
   domain (e.g. `sorafilms.in`) or GA4 measurement ID (e.g. `G-XXXXXXX`) there
   and set `analyticsProvider` to `"plausible"` or `"ga4"`. Leave it empty and
@@ -78,6 +88,22 @@ exact text in quotes.
   `[CLIENT TO CONFIRM]` placeholders (highlight video [X] days, full
   video & album [Y] weeks, advance [Z]%). Tell Muse your usual delivery
   weeks and usual advance % and the placeholders will be replaced.
+- **Hindi toggle:** the header has a हिंदी / English toggle. The
+  translations live in `SORA_I18N` in `assets/js/main.js` (nav, hero,
+  services, headings, date checker, enquiry form, FAQ, footer) and the
+  WhatsApp messages in `MSG` in the same file. **Please review the Hindi
+  wording before launch** — it is a first translation, and any correction
+  is a one-line change in `SORA_I18N`.
+- **Real Weddings stories:** `real-weddings/` — a listing page plus three
+  story templates (`story-1/`, `story-2/`, `story-3/`), all marked
+  `[CLIENT TO PROVIDE]`. Replace the placeholders with real couples
+  (names, place, package, a few lines, photos) and link the listing page
+  from the main navigation — it is hidden from the nav until real stories
+  are ready.
+- **Team & studio story:** the About page has a "Meet the Team" section
+  (three photo slots) and an "Our Studio Story" paragraph, both marked
+  `[CLIENT TO PROVIDE]`. Replace them with real team members and the
+  studio's story in the studio's own words.
 
 ## Deploy / updating
 

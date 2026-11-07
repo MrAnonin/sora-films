@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mranonin.github.io/sora-films/sitemap.xml
