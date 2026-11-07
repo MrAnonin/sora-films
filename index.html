@@ -756,6 +756,32 @@
         .home-contact-actions>a:before{color:var(--gold-text)!important;border-color:var(--gold)!important}
         .home-contact-actions>a.btn-outline{background:transparent!important;color:var(--maroon-ink)!important;border-color:var(--gold)!important}
         .home-contact-actions>a:not(.btn):hover,.home-contact-actions>a:not(.btn):focus-visible{color:var(--maroon-ink)!important;background:rgba(179,135,44,.10)!important}
+
+        /* ---------- white-beige in dark mode too (2026-11-07): the site had a dark-mode block that turned it dark on phones in dark mode; force the same white-beige values there ---------- */
+        @media (prefers-color-scheme: dark){
+          :root{
+            --bg:#fdfaf1;
+            --bg-soft:#f6efdf;
+            --surface:#fffefb;
+            --surface-2:#f8f1de;
+            --ink:#2a1d16;
+            --ink-soft:#5e4b3b;
+            --maroon:#6d1220;
+            --maroon-deep:#450a14;
+            --maroon-ink:#57101c;
+            --maroon-text:#6d1220;
+            --gold:#b3872c;
+            --gold-bright:#c9a24b;
+            --gold-soft:#e9d9ae;
+            --gold-text:#7d5a10;
+            --line:#e3d5ba;
+            --shadow:0 18px 45px rgba(69,10,20,.13);
+            --shadow-sm:0 8px 24px rgba(69,10,20,.10);
+            --head-bg:rgba(253,250,241,.92);
+            color-scheme:light;
+          }
+          .map-frame iframe{filter:none}
+        }
 </style>
   <style id="sora-visual-corrections">
 /* Visual corrections: make the two package options unmistakable and organize contact actions. */
