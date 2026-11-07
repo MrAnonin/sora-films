@@ -67,6 +67,18 @@ Repo: https://github.com/MrAnonin/sora-films (branch `main`)
 No colours, content, prices, phone numbers or booking flows changed in
 Phase 2, except the items above.
 
+## Fix — Package Finder quiz left-edge clipping (2026-11-08)
+
+- The live check found the quiz panel's heading, question numbers and the
+  "Show My Package" button cut off at the panel's left border. Cause: the
+  quiz reuses the `.custom-box` two-column grid but has no
+  `.custom-main` wrapper, so its content sat flush against the border
+  (the "Customize Your Package" builder is unaffected — it has its own
+  padded columns). Fix: the quiz is now a single column with the same
+  32 px padding the builder uses (20 px on phones). The quiz logic and
+  content are unchanged, and the result (Wedding / 2 days / "A good balance"
+  → Gold ₹42,000) was re-verified live.
+
 ## Phase 1 — Quick wins (2026-11-08)
 
 - **1.1 Link preview (og:image):** the preview image is now a real file,

@@ -946,6 +946,12 @@ input[aria-invalid="true"],textarea[aria-invalid="true"],select[aria-invalid="tr
 .google-badge{display:inline-block;margin-bottom:18px;padding:10px 18px;border:1px solid var(--gold);border-radius:999px;color:var(--maroon-text);text-decoration:none;font-weight:700;font-size:14.5px}
 .google-badge:hover{background:rgba(179,135,44,.12)}
 
+/* ---------- Phase 2 fix: Package Finder quiz left-edge clipping ----------
+   The quiz reuses .custom-box (a two-column grid) but has no .custom-main wrapper, so its
+   children sat flush against the panel border — the "F" of "Find" and the question numbers
+   were cut off. Single column + the same 32px padding the builder uses. */
+#packageFinder{grid-template-columns:minmax(0,1fr);padding:32px}
+@media(max-width:760px){#packageFinder{padding:20px}}
 /* ---------- Phase 2: package comparison table (stacked cards on mobile) ---------- */
 .compare-wrap{margin-top:44px}
 .compare-wrap h3{font-family:"Playfair Display",serif;font-size:26px;margin:0 0 6px}
