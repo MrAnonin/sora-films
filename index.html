@@ -784,7 +784,13 @@
         }
 
       /* ---------- full-screen hero only (2026-11-08): hero fills the viewport height; the rest of the site stays in its centred 1180px column ---------- */
-      .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:128px 0 72px}
+      /* ---------- hero ratios (2026-11-08): headline, script and photo scaled up so the hero fills the screen instead of looking small and empty ---------- */
+      .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 64px}
+      .hero h1{font-size:clamp(42px,5.6vw,76px)}
+      .hero .script{font-size:clamp(32px,4.4vw,48px)}
+      .hero p.lead{font-size:20px;margin:22px 0 32px}
+      .hero-photo{width:min(520px,100%)}
+      @media (min-width:901px){.hero-grid{gap:72px}}
     </style>
   <style id="sora-visual-corrections">
 /* Visual corrections: make the two package options unmistakable and organize contact actions. */
