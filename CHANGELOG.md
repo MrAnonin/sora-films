@@ -3,6 +3,70 @@
 Live site: https://mranonin.github.io/sora-films/
 Repo: https://github.com/MrAnonin/sora-films (branch `main`)
 
+## Phase 2 — Performance, trust & leads (2026-11-08)
+
+- **2.7 Images moved out of the file:** all 9 unique photos are now
+  separate files in `assets/img/` (WebP first, JPEG fallback, plus a 480 px
+  variant for small screens), each used once instead of being embedded up
+  to 4 times. Every `<img>` now has width/height (no layout shift),
+  `loading="lazy"` below the fold and `fetchpriority="high"` on the hero
+  only. The logo is one shared file (`logo.png`, 82 KB → 11 KB) used in the
+  header, footer and favicon. The gallery lightbox keeps working — gallery
+  images use plain `<img srcset>` (JPEG) so the lightbox wrap code is
+  untouched; all other images get WebP. `index.html` shrank from
+  2,037,789 bytes to ~249 KB. The 3 remaining `data:` URIs are the tiny
+  SVG mandala patterns in the CSS, not photos. The <500 KB homepage
+  initial-transfer target is met for the page itself (HTML ~249 KB, hero
+  photo 46 KB WebP, logo 11–14 KB); a full Lighthouse run is still to be
+  recorded — see the final report.
+- **2.8 Showreel:** a "Watch Our Showreel" section is built on Home (after
+  the featured-work section) with a lite YouTube embed — thumbnail first,
+  the iframe loads only when the visitor presses play. The URL lives in
+  `SORA_CONFIG.showreelUrl`; the section stays hidden until a link is set.
+  **[CLIENT TO PROVIDE] showreel YouTube link.**
+- **2.9 Testimonials:** cards are fed from one array,
+  `SORA_CONFIG.testimonials` (currently empty — only real client reviews,
+  name/place/event/package/text, optional 1–5 rating and photo). While it
+  is empty, the page keeps its current "Review Us on Google" and "Share
+  Your Experience" cards; when reviews are added, the cards render plus a
+  "Read our reviews on Google" badge linking to the studio's Google
+  listing. No rating is shown unless the client actually gave one.
+  **[CLIENT TO PROVIDE] real client reviews.**
+- **2.10 Instagram strip:** the Gallery strip is renamed "From Our
+  Gallery" — the photos are the studio's own gallery photos, and the text
+  no longer claims they came from Instagram. All six alt texts fixed to
+  plain descriptions. The "Follow @the.sorafilms on Instagram" link stays.
+- **2.11 Lead capture:** on enquiry submit, the site POSTs the enquiry to
+  `SORA_CONFIG.leadCaptureEndpoint` (Google Apps Script → Sheet, or
+  Formspree) before opening WhatsApp, with a 4-second cap so a slow
+  endpoint never blocks the visitor. Empty or failing endpoint falls back
+  silently to the current WhatsApp behaviour. Setup is in the README.
+  **[CLIENT TO PROVIDE] Apps Script / Formspree endpoint.**
+- **2.12 Availability calendar:** the date checker reads
+  `assets/data/booked-dates.json` (currently an empty list) and tells
+  visitors a picked date is already booked, suggesting another date or a
+  WhatsApp message. Final confirmation is still on WhatsApp. The README
+  explains how to update the list.
+  **[CLIENT TO PROVIDE] booked dates.**
+- **2.13 Delivery & payment clarity:** the booking-steps card and the FAQ
+  delivery/advance answers now give typical timelines and advance as
+  `[CLIENT TO CONFIRM]` placeholders (highlight video [X] days, full
+  video & album [Y] weeks, advance [Z]%). The 14 Terms & Policies keep
+  their exact wording — term 5 still reads "confirmed in your quotation".
+  **[CLIENT TO CONFIRM] usual delivery weeks and advance %.**
+- **2.14 Package comparison table:** a Silver / Gold / Platinum comparison
+  table sits after the wedding package cards, built from the real card
+  inclusions (videographer/cinematographer, photographer, drone days,
+  album, video, reels, frames, free gift). On mobile it becomes stacked
+  cards. "Most Popular" stays on Royal; no "Most Booked" badge was added
+  (unconfirmed which package is most booked).
+- **2.15 Policies page:** the 14 terms are now an accessible
+  `<details>`/`<summary>` accordion with an "Expand all" / "Collapse all"
+  button. The wording of every term is unchanged (verified verbatim).
+
+No colours, content, prices, phone numbers or booking flows changed in
+Phase 2, except the items above.
+
 ## Phase 1 — Quick wins (2026-11-08)
 
 - **1.1 Link preview (og:image):** the preview image is now a real file,

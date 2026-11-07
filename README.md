@@ -15,11 +15,17 @@ drone coverage, premium albums and video editing.
 
 - `index.html` — the complete website (single page, hash-routed sections:
   Home, About, Services, Packages, Gallery, Contact/Booking, Terms & Policies).
-  Most photos are embedded in the file; the link-preview image is separate (see below).
+  Photos live in `assets/img/` (see below); only small decorative patterns
+  remain embedded.
 - `contract.html` — printable Booking Contract (Marriage/Wedding, Engagement,
   Birthday, Pre-Wedding, Other), linked from the footer as "Booking Contract".
-- `assets/img/og-image.jpg` — the 1200×630 photo used when the site link is
-  shared on WhatsApp / Facebook (the link preview card).
+- `assets/img/` — all photos as separate files: each photo as `.jpg` and
+  `.webp` (WebP first, JPEG fallback), plus a 480 px variant for small
+  screens; `logo.png` is the one shared logo (header, footer, favicon),
+  `og-image.jpg` is the 1200×630 link-preview image.
+- `assets/data/booked-dates.json` — the list of booked dates
+  (`YYYY-MM-DD`). The date checker reads it and marks those dates
+  unavailable. Edit the list, nothing else.
 - `.nojekyll` — tells GitHub Pages to serve the files as-is.
 - `README.md` — this file. `CHANGELOG.md` — what changed, phase by phase.
 
@@ -31,8 +37,9 @@ exact text in quotes.
 - **Prices:** the six packages are in the Packages page. Wedding packages:
   Silver ₹30,000, Gold ₹42,000, Platinum ₹59,999. Essential Collections:
   Classic ₹20,000, Signature ₹23,000, Royal ₹25,000. Change the price in the
-  package card **and** in the Package Finder quiz (`PF_PACKAGES`) and the
-  Booking Contract dropdown (`contract.html`) so all three match.
+  package card **and** in the Package Finder quiz (`PF_PACKAGES`), the
+  comparison table and the Booking Contract dropdown (`contract.html`) so
+  all four match.
 - **Muhurat dates:** one place — the `SORA_CONFIG` block near the end of
   `index.html` (`muhurat: { year, label, note, lastDate }`). The strip on the
   homepage is drawn from it and hides itself automatically after `lastDate`.
@@ -44,20 +51,33 @@ exact text in quotes.
   (with package name), `call_click`, `email_click`, `enquiry_form_submit`,
   `package_finder_completed`, `datecheck_submit`.
 - **Showreel video:** `SORA_CONFIG.showreelUrl` — paste the YouTube link
-  there (Phase 2 work adds the section; until then the value is unused).
+  there. The showreel section is built but hidden until a link is set; once
+  set, visitors see a thumbnail and the video loads only when they press
+  play (so it never slows the page down).
+- **Testimonials:** `SORA_CONFIG.testimonials` — an array of real client
+  reviews. Each one: `{ name, place, event, package, text, rating (1–5, optional),
+  photo (optional) }`. Only real reviews, in the client's own words. While
+  the list is empty, the page keeps its current "Review Us on Google" and
+  "Share Your Experience" cards.
 - **Lead capture (save enquiries to a sheet):** `SORA_CONFIG.leadCaptureEndpoint`
-  — paste a Google Apps Script web-app URL or a Formspree endpoint there
-  (Phase 2 work wires it up; until then enquiries go to WhatsApp only).
-- **Booked dates (availability calendar):** Phase 2 will add
-  `assets/data/booked-dates.json` — one editable list of booked dates.
-- **Testimonials / real weddings / team photos:** Phase 2–3. Only real client
-  reviews are ever added (name, place, package/event, 1–2 lines) — never
-  invented ones. Send the real text or a screenshot and it will be added
-  verbatim.
-- **Delivery timelines & advance %:** there is no standard figure on the site
-  — the site says "confirmed in your quotation". Tell Muse your usual
-  delivery weeks and usual advance % and they will be added as the site's
-  standard text.
+  — paste a Google Apps Script web-app URL or a Formspree endpoint there.
+  On enquiry submit, the site POSTs the enquiry (name, phone, event type,
+  date, package, message) to that endpoint and then opens WhatsApp as
+  usual. If the endpoint is empty or fails, WhatsApp still opens — nothing
+  is ever lost. To set up the sheet: create a Google Sheet, add a small
+  Apps Script that appends each POST to a row, deploy it as a web app
+  ("Execute as: Me", "Who has access: Anyone"), and paste the web-app URL
+  here.
+- **Booked dates (availability calendar):** `assets/data/booked-dates.json`
+  — add booked dates as `YYYY-MM-DD` strings in the `booked` list, e.g.
+  `["2026-11-21", "2026-12-02"]`. The date checker reads this file and
+  tells visitors that date is already booked. Leave the list empty when
+  nothing is booked.
+- **Delivery timelines & advance %:** there is no standard figure on the
+  site yet — the FAQ and the booking-steps card show
+  `[CLIENT TO CONFIRM]` placeholders (highlight video [X] days, full
+  video & album [Y] weeks, advance [Z]%). Tell Muse your usual delivery
+  weeks and usual advance % and the placeholders will be replaced.
 
 ## Deploy / updating
 
