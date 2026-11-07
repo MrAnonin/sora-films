@@ -782,7 +782,11 @@
           }
           .map-frame iframe{filter:none}
         }
-</style>
+
+      /* ---------- full-width layout + full-screen hero (2026-11-07): site spans the whole screen edge to edge; hero fills the viewport height ---------- */
+      .wrap{width:100%;max-width:none;margin-inline:0;padding-inline:clamp(18px,4vw,64px)}
+      .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:128px 0 72px}
+    </style>
   <style id="sora-visual-corrections">
 /* Visual corrections: make the two package options unmistakable and organize contact actions. */
 .home-packages .center{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;gap:1rem;margin-top:2rem}
