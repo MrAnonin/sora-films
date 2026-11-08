@@ -173,9 +173,9 @@
       @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
       /* ---------- hanging marigold toran ---------- */
-      .toran{position:absolute;top:94px;left:0;right:0;z-index:1;display:flex;justify-content:space-between;padding:0 10px;pointer-events:none}
+      .toran{position:absolute;top:72px;left:0;right:0;z-index:1;display:flex;justify-content:space-between;padding:0 10px;pointer-events:none}
       .toran span{
-        position:relative;width:14px;height:var(--h,84px);flex:none;transform-origin:top center;
+        position:relative;width:14px;height:var(--h,44px);flex:none;transform-origin:top center;
         animation:sway 6.5s ease-in-out infinite alternate;
         background-image:
           radial-gradient(circle at 50% 6px,#f2a81d 4.4px,#cf7507 5.6px,transparent 6.6px),
@@ -779,7 +779,7 @@
       .hero-badge{display:none}
       .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--bg) 0%,rgba(253,250,241,.97) 34%,rgba(253,250,241,.82) 52%,rgba(253,250,241,.42) 72%,rgba(253,250,241,.15) 100%),linear-gradient(0deg,rgba(253,250,241,.92),rgba(253,250,241,0) 32%)}
       .toran{z-index:2}
-      .hero-eyebrow{display:flex;align-items:center;gap:16px;color:var(--gold-text);font-size:13px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;margin-bottom:20px}
+      .hero-eyebrow{position:relative;z-index:3;display:flex;align-items:center;gap:16px;color:var(--gold-text);font-size:13px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;margin-bottom:20px}
       .hero-eyebrow i{display:block;height:1px;width:56px;background:linear-gradient(90deg,transparent,var(--gold))}
       .hero-eyebrow i:last-child{background:linear-gradient(90deg,var(--gold),transparent)}
       .svc-strip{background:linear-gradient(135deg,#450a14,#6d1220);border-block:1px solid var(--gold);display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}
