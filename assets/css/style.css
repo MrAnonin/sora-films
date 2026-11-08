@@ -777,7 +777,7 @@
       .hero-photo .frame img{aspect-ratio:auto;height:100%;object-position:50% 12%}
       .hero-photo::before,.hero-photo::after{display:none}
       .hero-badge{display:none}
-      .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--bg) 0%,rgba(253,250,241,.97) 34%,rgba(253,250,241,.82) 52%,rgba(253,250,241,.42) 72%,rgba(253,250,241,.15) 100%),linear-gradient(0deg,rgba(253,250,241,.92),rgba(253,250,241,0) 32%)}
+      .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--bg) 0%,rgba(253,250,241,.94) 26%,rgba(253,250,241,.68) 46%,rgba(253,250,241,.28) 66%,rgba(253,250,241,.05) 84%,rgba(253,250,241,0) 100%),linear-gradient(0deg,rgba(253,250,241,.78),rgba(253,250,241,0) 28%)}
       .toran{z-index:2}
       .hero-eyebrow{position:relative;z-index:3;display:flex;align-items:center;gap:16px;color:var(--gold-text);font-size:13px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;margin-bottom:20px}
       .hero-eyebrow i{display:block;height:1px;width:56px;background:linear-gradient(90deg,transparent,var(--gold))}
@@ -793,7 +793,7 @@
       .home-packages h2{font-family:"Playfair Display",serif;color:var(--maroon-text);font-size:clamp(34px,4.4vw,52px);margin:0 0 6px}
       .home-packages .pkg-sub{font-family:"Playfair Display",serif;font-style:italic;color:var(--gold-text);font-size:clamp(19px,2.4vw,26px);margin:0 0 28px}
       @media (max-width:900px){
-        .hero::after{background:linear-gradient(90deg,rgba(253,250,241,.98) 0%,rgba(253,250,241,.92) 55%,rgba(253,250,241,.78) 100%),linear-gradient(0deg,rgba(253,250,241,.94),rgba(253,250,241,0) 35%)}
+        .hero::after{background:linear-gradient(90deg,rgba(253,250,241,.96) 0%,rgba(253,250,241,.85) 50%,rgba(253,250,241,.55) 100%),linear-gradient(0deg,rgba(253,250,241,.85),rgba(253,250,241,0) 30%)}
         .hero-eyebrow{letter-spacing:.22em;font-size:12px}
         .hero-eyebrow i{display:none}
         .svc-strip a{flex:1 1 42%;padding:12px 14px}
