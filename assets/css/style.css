@@ -173,9 +173,9 @@
       @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
       /* ---------- hanging marigold toran ---------- */
-      .toran{position:absolute;top:72px;left:0;right:0;z-index:1;display:flex;justify-content:space-between;padding:0 10px;pointer-events:none}
+      .toran{position:absolute;top:94px;left:0;right:0;z-index:1;display:flex;justify-content:space-between;padding:0 10px;pointer-events:none}
       .toran span{
-        position:relative;width:14px;height:var(--h,44px);flex:none;transform-origin:top center;
+        position:relative;width:14px;height:var(--h,84px);flex:none;transform-origin:top center;
         animation:sway 6.5s ease-in-out infinite alternate;
         background-image:
           radial-gradient(circle at 50% 6px,#f2a81d 4.4px,#cf7507 5.6px,transparent 6.6px),
