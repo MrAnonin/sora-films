@@ -973,3 +973,29 @@ table.compare{width:100%;border-collapse:collapse;min-width:560px;background:var
 .team-card h3{font-size:1.2rem;margin:14px 0 4px}
 .studio-story{max-width:760px;margin:34px auto 0;text-align:center}
 .studio-story h2{margin-bottom:10px}
+
+/* ---------- Shop (Sora Collections, 2026-11-13): spacious product cards, category filters ---------- */
+.shop-filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 0 36px}
+.shop-filter{border:1.5px solid var(--gold);background:var(--surface);color:var(--maroon-text);border-radius:999px;padding:11px 24px;font:600 1rem "Jost",sans-serif;cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.shop-filter:hover{transform:translateY(-1px)}
+.shop-filter.on{background:var(--maroon-fixed);border-color:var(--maroon-fixed);color:#fdf3e0}
+.shop-filter:focus-visible{outline:3px solid var(--gold-bright);outline-offset:2px}
+.shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+@media (max-width:960px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.shop-grid{grid-template-columns:minmax(0,1fr)}}
+.shop-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease)}
+.shop-card:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:var(--gold-soft)}
+.shop-visual{position:relative;display:grid;place-items:center;padding:46px 24px 38px;background-color:var(--surface-2);background-image:var(--pattern);background-size:200px;border-bottom:3px double var(--gold)}
+.shop-tag{position:absolute;top:16px;left:16px;background:var(--maroon-fixed);color:#f7e8c8;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:6px 14px;border-radius:999px;border:1px solid var(--gold-bright)}
+.shop-ic{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#7d1a2a,var(--maroon-deep));color:var(--gold-bright);box-shadow:inset 0 0 0 1px rgba(201,162,75,.5),0 0 0 4px var(--surface),0 0 0 6px var(--gold-soft)}
+.shop-ic svg{width:46px;height:46px}
+.shop-body{padding:28px 28px 30px;display:flex;flex-direction:column;flex:1}
+.shop-body h3{font-size:23px;margin-bottom:6px}
+.shop-size{margin:0 0 10px;color:var(--gold-text);font-weight:600;font-size:14.5px;letter-spacing:.06em;text-transform:uppercase}
+.shop-desc{margin:0 0 18px;color:var(--ink-soft);font-weight:300;font-size:16px;line-height:1.6;flex:1}
+.shop-order{margin:0 0 18px;padding-top:16px;border-top:1px dashed var(--line);color:var(--ink-soft);font-size:14.5px}
+.shop-order span:first-child{color:var(--maroon-ink);font-weight:600}
+.shop-body .btn{width:100%;justify-content:center}
+.shop-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:960px){.shop-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.shop-steps{grid-template-columns:minmax(0,1fr)}}
