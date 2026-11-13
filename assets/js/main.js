@@ -482,6 +482,58 @@ if (form) form.addEventListener("submit", function (e) { e.preventDefault(); if 
     "Contact",
     "संपर्क"
   ],
+  "nav.shop": [
+    "Shop",
+    "दुकान"
+  ],
+  "shop.kicker": [
+    "Sora Collections",
+    "सोरा कलेक्शन्स"
+  ],
+  "shop.h1": [
+    "Wedding Keepsakes, <em>Made to Order</em>",
+    "शादी की यादें, <em>ऑर्डर पर तैयार</em>"
+  ],
+  "shop.intro": [
+    "Albums, frames, prints and gifts — made from your wedding photos and personalised for you. Every piece is made to order. Enquire on WhatsApp for prices and details.",
+    "एल्बम, फ़्रेम, प्रिंट और गिफ़्ट — आपकी शादी की फ़ोटो से बने, आपके लिए पर्सनलाइज़्ड। हर चीज़ ऑर्डर पर बनती है। कीमत और जानकारी के लिए WhatsApp पर पूछें।"
+  ],
+  "shop.filter_all": [
+    "All",
+    "सभी"
+  ],
+  "shop.filter_albums": [
+    "Albums & Frames",
+    "एल्बम और फ़्रेम"
+  ],
+  "shop.filter_prints": [
+    "Prints & Wall Art",
+    "प्रिंट और वॉल आर्ट"
+  ],
+  "shop.filter_gifts": [
+    "Gifts & Keepsakes",
+    "गिफ़्ट और कीपसेक"
+  ],
+  "shop.made_order": [
+    "Made to order",
+    "ऑर्डर पर बनता है"
+  ],
+  "shop.price_enquiry": [
+    "Price on enquiry",
+    "कीमत पूछने पर"
+  ],
+  "shop.enquire": [
+    "Enquire on WhatsApp",
+    "WhatsApp पर पूछें"
+  ],
+  "shop.how_kicker": [
+    "How Ordering Works",
+    "ऑर्डर कैसे करें"
+  ],
+  "shop.how_h2": [
+    "Three Easy <em>Steps</em>",
+    "तीन आसान <em>चरण</em>"
+  ],
   "hero.eyebrow": [
     "Sora Films — Capture It Better",
     "सोरा फ़िल्म्स — बेहतर कैप्चर करें"
@@ -803,6 +855,30 @@ if (form) form.addEventListener("submit", function (e) { e.preventDefault(); if 
         if (show) shown += 1;
       });
       if (empty) empty.hidden = shown !== 0;
+    });
+  });
+})();
+
+/* ---------- Shop category filters (2026-11-13) ----------
+   Same pattern as the gallery filters: buttons filter the shop grid
+   by the cards' data-cat. Guarded — runs only on the shop page. */
+(function () {
+  "use strict";
+  var btns = document.querySelectorAll(".shop-filter");
+  if (!btns.length) return;
+  var grid = document.querySelector(".shop-grid");
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll("article[data-cat]"));
+  btns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var f = btn.getAttribute("data-filter");
+      btns.forEach(function (b) { b.classList.remove("on"); b.setAttribute("aria-pressed", "false"); });
+      btn.classList.add("on");
+      btn.setAttribute("aria-pressed", "true");
+      cards.forEach(function (card) {
+        var show = f === "all" || card.getAttribute("data-cat") === f;
+        card.style.display = show ? "" : "none";
+      });
     });
   });
 })();
